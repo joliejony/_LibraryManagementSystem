@@ -22,15 +22,29 @@
                 <select data-event-filter="branch"><option value="all">All branches</option><option>Central Library</option><option>Country Hills Library</option><option>South Library</option></select>
             </label>
             <label>Event type
-                <select data-event-filter="type"><option value="all">All types</option><option value="Book club">Book club</option><option value="Tutoring">Tutoring</option><option value="Welcome session">Welcome session</option></select>
+                <select data-event-filter="type"><option value="all">All types</option><option value="Book club">Book club</option><option value="Tutoring">Tutoring</option><option value="Welcome session">Welcome session</option><option value="Story time">Story time</option><option value="Creative workshop">Creative workshop</option></select>
             </label>
             <label>Audience
                 <select data-event-filter="audience"><option value="all">All audiences</option><option value="Adults">Adults</option><option value="Teens">Teens</option><option value="Families">Families</option></select>
             </label>
             <button class="event-filter-reset" type="button" data-reset-events>Clear filters</button>
         </section>
-        <p class="event-result-count" data-event-count aria-live="polite">3 events</p>
+        <p class="event-result-count" data-event-count aria-live="polite">5 events</p>
         <div class="event-listing-grid" id="event-list">
+            <article class="event" data-branch="Central Library" data-type="Story time" data-audience="Families">
+                <p class="event-kind">FAMILIES · IN PERSON</p><h2>Saturday Story Time</h2>
+                <p><strong>Date:</strong> October 18, 2026 · 11:00 AM</p><p><strong>Location:</strong> Central Library, Main Floor</p>
+                <p>Stories, songs, and a little imagination for young readers.</p>
+                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 20. Registration is recommended. Designed for young readers and their families.</p></details>
+                <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+            </article>
+            <article class="event" data-branch="Central Library" data-type="Creative workshop" data-audience="Adults">
+                <p class="event-kind">ADULTS · DROP IN</p><h2>Make Something Together</h2>
+                <p><strong>Date:</strong> October 20, 2026 · 6:00 PM</p><p><strong>Location:</strong> Central Library, Create Space</p>
+                <p>Meet local makers and try a new creative practice.</p>
+                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 10. Drop in; registration is not required. Materials are provided.</p></details>
+                <button class="event-register" type="button" data-register-event>View event details <span aria-hidden="true">→</span></button>
+            </article>
             <article class="event" data-branch="Country Hills Library" data-type="Book club" data-audience="Adults">
                 <p class="event-kind">ADULTS · BOOK CLUB</p><h2>Community Book Club</h2>
                 <p><strong>Date:</strong> November 15, 2026 · 2:00 PM</p><p><strong>Location:</strong> Country Hills Library</p>
