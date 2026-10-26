@@ -136,9 +136,16 @@ a {
     border-radius: 3px 3px 0 0;
 }
 
-.account-button {
+.account-menu {
+    position: relative;
     justify-self: end;
-    padding: 12px 20px;
+}
+
+.account-menu summary {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 18px;
     border: 1px solid #244d63;
     border-radius: 999px;
     background: #244d63;
@@ -146,14 +153,71 @@ a {
     color: #fff;
     font-size: 13px;
     font-weight: 800;
-    text-decoration: none;
+    list-style: none;
+    cursor: pointer;
     transition: .2s;
 }
 
-.account-button:hover {
+.account-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.account-menu summary:hover,
+.account-menu[open] summary {
     border-color: #17384b;
     background: #17384b;
-    color: #fff;
+}
+
+.account-menu summary:focus-visible,
+.account-menu-panel a:focus-visible {
+    outline: 3px solid rgba(237, 154, 85, .65);
+    outline-offset: 3px;
+}
+
+.account-chevron {
+    margin-left: 2px;
+    font-size: 16px;
+}
+
+.account-menu-panel {
+    position: absolute;
+    top: calc(100% + 9px);
+    right: 0;
+    z-index: 5;
+    width: 190px;
+    padding: 6px;
+    border: 1px solid #e1e7e4;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(23, 56, 75, .16);
+}
+
+.account-menu-panel a,
+.account-menu-disabled {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 11px;
+    border-radius: 5px;
+    color: var(--blue-deep);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.account-menu-panel a:hover {
+    background: #f0f5f3;
+}
+
+.account-menu-disabled {
+    color: #69777c;
+}
+
+.account-menu-disabled small {
+    color: #8b9699;
+    font-size: 9px;
+    font-weight: 500;
 }
 
 .user-icon {
@@ -1019,7 +1083,7 @@ a {
         font-size: 12px;
     }
 
-    .account-button {
+    .account-menu summary {
         padding: 10px 12px;
         font-size: 11px;
     }
@@ -1109,13 +1173,13 @@ a {
         display: none;
     }
 
-    .account-button {
+    .account-menu summary {
         padding: 8px 9px;
         font-size: 9px;
     }
 
-    .user-icon {
-        margin-right: 3px;
+    .account-menu .user-icon {
+        margin-right: 0;
     }
 
     .hero-inner {
@@ -2055,5 +2119,174 @@ a {
         width: 100%;
         max-width: none;
         height: 230px;
+    }
+}
+
+
+/* Login page */
+.login-page {
+    min-height: 100vh;
+    background: #e8eff0;
+}
+
+.login-main {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 32px 18px;
+    background: linear-gradient(rgba(239, 244, 242, .72), rgba(239, 244, 242, .82)), url('images/back%207.jpg') center / cover no-repeat;
+}
+
+.login-card {
+    position: relative;
+    width: min(100%, 430px);
+    padding: 38px 42px 34px;
+    border: 1px solid rgba(36, 77, 99, .12);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(23, 56, 75, .17);
+}
+
+.login-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #68767b;
+    font: 400 25px / 1 var(--sans);
+    text-decoration: none;
+}
+
+.login-close:hover {
+    background: #f1f4f2;
+    color: var(--blue-deep);
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto 24px;
+    color: var(--blue-deep);
+    font: 700 15px / 1.3 var(--sans);
+    text-decoration: none;
+}
+
+.login-brand .brand-mark {
+    flex: 0 0 54px;
+    width: 54px;
+    height: 36px;
+}
+
+.login-brand .brand-logo-image {
+    width: 90px;
+    height: 90px;
+    left: -18px;
+    top: -27px;
+}
+
+.login-card h1 {
+    margin: 0;
+    color: var(--blue-deep);
+    font: 600 32px / 1.2 var(--serif);
+    text-align: center;
+}
+
+.login-intro {
+    margin: 8px 0 25px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 7px;
+    color: #34464d;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.login-form input {
+    display: block;
+    width: 100%;
+    height: 45px;
+    margin-bottom: 18px;
+    padding: 0 12px;
+    border: 1px solid #cfd9d8;
+    border-radius: 5px;
+    background: #fff;
+    color: var(--ink);
+    font: 13px var(--sans);
+}
+
+.login-form input:focus {
+    border-color: var(--blue);
+    outline: 3px solid rgba(36, 77, 99, .13);
+}
+
+.password-label-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.login-text-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--blue);
+    font: 700 11px var(--sans);
+    cursor: pointer;
+}
+
+.login-text-button:hover {
+    text-decoration: underline;
+}
+
+.login-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: 5px;
+    background: var(--blue);
+    color: #fff;
+    font: 700 13px var(--sans);
+    cursor: pointer;
+}
+
+.login-submit:hover {
+    background: var(--blue-deep);
+}
+
+.login-submit span {
+    font-size: 18px;
+}
+
+.create-account-prompt {
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+}
+
+.create-account-prompt .login-text-button {
+    margin-left: 3px;
+    font-size: inherit;
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 34px 25px 28px;
     }
 }

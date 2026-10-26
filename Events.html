@@ -14,7 +14,13 @@
                 <a href="Browse.html">Browse</a>
                 <a class="active" href="Events.html">Events</a>
             </nav>
-            <a class="account-button" href="index.html#account"><span class="user-icon" aria-hidden="true">♙</span> Sign in / My Account</a>
+            <details class="account-menu">
+            <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
+            <div class="account-menu-panel">
+                <a href="Login.html">Sign in</a>
+                <span class="account-menu-disabled" aria-disabled="true">My Account <small>Coming soon</small></span>
+            </div>
+        </details>
         </header>
         <header class="events-banner">
             <h1>Upcoming Events</h1>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your Calgary Public Library account.">
+    <title>Log In | Calgary Public Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <main class="login-main">
+        <section class="login-card" aria-labelledby="login-title">
+            <a class="login-close" href="index.html" aria-label="Return to home">×</a>
+            <a class="login-brand" href="index.html" aria-label="Calgary Public Library home">
+                <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+                <span>Calgary Public Library</span>
+            </a>
+
+            <h1 id="login-title">Welcome back</h1>
+            <p class="login-intro">Sign in to your library account</p>
+
+            <form class="login-form">
+                <label for="library-id">Email or library card number</label>
+                <input id="library-id" name="library-id" type="text" autocomplete="username" placeholder="Enter your email or card number">
+
+                <div class="password-label-row">
+                    <label for="login-password">Password</label>
+                    <button class="login-text-button" type="button">Forgot password?</button>
+                </div>
+                <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password">
+
+                <button class="login-submit" type="button">Log in <span aria-hidden="true">→</span></button>
+            </form>
+
+            <p class="create-account-prompt">New to the library? <button class="login-text-button" type="button">Create an account</button></p>
+        </section>
+    </main>
+</body>
+</html>
