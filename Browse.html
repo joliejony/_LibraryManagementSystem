@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search and browse books and other items at Calgary Public Library.">
+    <title>Browse the Catalogue | Calgary Public Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="browse-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Calgary Public Library home">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span class="brand-name">Calgary Public Library</span>
+        </a>
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="active" href="Browse.html">Browse</a>
+            <a href="Events.html">Events</a>
+        </nav>
+        <a class="account-button" href="index.html#account"><span class="user-icon" aria-hidden="true">♙</span> Sign in / My Account</a>
+    </header>
+
+    <main class="browse-main">
+        <header class="browse-banner" aria-labelledby="browse-title">
+            <div class="browse-banner-inner">
+                <p class="eyebrow">LIBRARY CATALOG</p>
+                <h1 id="browse-title">Find your next favourite.</h1>
+                <p class="browse-prompt">Search by title, author, or topic.</p>
+            </div>
+
+            <div class="browse-controls">
+                <form class="catalogue-search" action="Browse.html" method="get" role="search">
+                    <label class="visually-hidden" for="catalogue-query">Search the library catalogue</label>
+                    <span aria-hidden="true">⌕</span>
+                    <input id="catalogue-query" name="q" type="search" placeholder="Title, author, or topic">
+                    <button type="submit">Search</button>
+                </form>
+
+                <div class="catalogue-filters" aria-label="Catalogue filters">
+                    <button class="selected" type="button" aria-pressed="true">All</button>
+                    <button type="button" aria-pressed="false">Book</button>
+                    <button type="button" aria-pressed="false">eBook</button>
+                    <button type="button" aria-pressed="false">Audiobook</button>
+                    <span class="filter-divider" aria-hidden="true"></span>
+                    <button type="button" aria-pressed="false">Kids</button>
+                    <button type="button" aria-pressed="false">Teens</button>
+                    <button type="button" aria-pressed="false">Adults</button>
+                </div>
+
+            </div>
+        </header>
+
+        <section class="catalogue" aria-label="Library catalogue search results">
+            <div class="results-heading">
+                <h2>Search results</h2>
+                <p><strong>3</strong> results</p>
+            </div>
+            <div class="catalogue-results" id="catalogue-results">
+                <article class="catalogue-card">
+                    <div class="catalogue-cover">
+                        <img src="images/book2.jpg" alt="A book being selected from a library shelf">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>BOOK</span><span>ADULT</span></div>
+                        <h3>To Kill a Mockingbird</h3>
+                        <p class="catalogue-author">by Harper Lee</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.8 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.8 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Available</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> 8 locations</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" aria-label="Add To Kill a Mockingbird to favourites" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card">
+                    <div class="catalogue-cover">
+                        <img src="images/book1.jpg" alt="An open book on a stack of books">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>BOOK</span><span>ADULT</span></div>
+                        <h3>Killers of the Flower Moon</h3>
+                        <p class="catalogue-author">by David Grann</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.6 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.6 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Available</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> 5 locations</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" aria-label="Add Killers of the Flower Moon to favourites" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card">
+                    <div class="catalogue-cover">
+                        <img src="images/ebook.jpg" alt="A reader using a tablet">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>EBOOK</span><span>TEENS</span></div>
+                        <h3>Kill Joy</h3>
+                        <p class="catalogue-author">by Holly Jackson</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.7 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.7 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Available now</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> Online</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" aria-label="Add Kill Joy to favourites" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="index.html">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span>Calgary Public Library</span>
+        </a>
+        <span>Curiosity lives here.</span>
+        <small>Library catalogue · CPSC 481</small>
+    </footer>
+</body>
+</html>
