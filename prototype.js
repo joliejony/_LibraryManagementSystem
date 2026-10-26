@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement("article");
             card.className = "saved-book-card";
             const image = document.createElement("img");
-            image.src = book.image;
+            image.src = book.title === "The Midnight Library" ? "images/themidnightlib.jpg" : book.image;
             image.alt = `Cover image for ${book.title}`;
             const info = document.createElement("div");
             const title = document.createElement("h3");
