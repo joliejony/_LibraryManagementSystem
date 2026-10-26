@@ -1802,3 +1802,258 @@ a {
     }
 }
 
+
+/* Book details page */
+.book-details-page {
+    min-height: 100vh;
+    background: #fbfaf7;
+}
+
+.book-details-main {
+    width: 89%;
+    max-width: 1080px;
+    min-height: 650px;
+    margin: 0 auto;
+    padding: 30px 0 78px;
+}
+
+.back-to-results {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.back-to-results:hover {
+    text-decoration: underline;
+}
+
+.book-detail-card {
+    display: grid;
+    grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+    gap: clamp(32px, 6vw, 76px);
+    padding: clamp(24px, 5vw, 54px);
+    border: 1px solid #e4e7e3;
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(30, 57, 66, .06);
+}
+
+.book-detail-left {
+    min-width: 0;
+}
+
+.book-detail-cover {
+    width: 100%;
+    max-width: 300px;
+    height: 330px;
+    overflow: hidden;
+    border-radius: 5px;
+    background: #e8efed;
+}
+
+.book-detail-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-description {
+    max-width: 340px;
+    margin-top: 24px;
+}
+
+.book-description h2,
+.format-options h2 {
+    margin: 0 0 10px;
+    color: var(--ink);
+    font: 600 19px / 1.3 var(--serif);
+}
+
+.book-description p {
+    margin: 0;
+    color: #5d686e;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.book-detail-info .eyebrow {
+    margin: 3px 0 10px;
+    color: #b26d3a;
+}
+
+.book-detail-info h1 {
+    margin: 0;
+    color: var(--blue-deep);
+    font: 600 clamp(30px, 4vw, 42px) / 1.15 var(--serif);
+    letter-spacing: -.7px;
+}
+
+.book-detail-author {
+    margin: 8px 0 15px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.book-detail-rating {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #344b57;
+    font-size: 13px;
+}
+
+.detail-stars {
+    color: #e2a04f;
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+
+.text-action {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--blue);
+    font: 700 12px var(--sans);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.favourite-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 19px 0 27px;
+    padding: 9px 14px;
+    border: 1px solid #d9e0df;
+    border-radius: 5px;
+    background: #fff;
+    color: var(--blue);
+    font: 700 12px var(--sans);
+    cursor: pointer;
+}
+
+.favourite-action span {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.format-options h2 {
+    margin-bottom: 10px;
+}
+
+.format-select-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #52636a;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.hold-controls {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.hold-controls select {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 12px;
+    border: 1px solid #b8c9c9;
+    border-radius: 5px;
+    background: #fff;
+    color: #35464e;
+    font: 600 12px var(--sans);
+}
+
+.place-hold-action {
+    min-width: 132px;
+    padding: 11px 16px;
+    border: 0;
+    border-radius: 5px;
+    background: var(--orange);
+    color: #2d3030;
+    font: 700 12px var(--sans);
+    cursor: pointer;
+}
+
+.place-hold-action:hover,
+.favourite-action:hover {
+    background: #f3b77e;
+}
+
+.availability-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    margin-top: 23px;
+    padding: 13px 15px;
+    border: 0;
+    border-radius: 5px;
+    background: var(--blue);
+    color: #fff;
+    font: 700 12px var(--sans);
+    text-align: left;
+    cursor: pointer;
+}
+
+.availability-action:hover {
+    background: var(--blue-deep);
+}
+
+.availability-action span {
+    font-size: 18px;
+}
+
+@media (max-width: 700px) {
+    .book-details-main {
+        width: 90%;
+        padding: 24px 0 58px;
+    }
+
+    .book-detail-card {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 22px;
+    }
+
+    .book-detail-left {
+        display: grid;
+        grid-template-columns: minmax(100px, .7fr) minmax(0, 1fr);
+        align-items: start;
+        gap: 18px;
+    }
+
+    .book-detail-cover {
+        height: 200px;
+    }
+
+    .book-description {
+        margin-top: 0;
+    }
+
+    .book-description h2 {
+        font-size: 16px;
+    }
+
+    .book-description p {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 440px) {
+    .book-detail-left {
+        grid-template-columns: 1fr;
+    }
+
+    .book-detail-cover {
+        width: 100%;
+        max-width: none;
+        height: 230px;
+    }
+}

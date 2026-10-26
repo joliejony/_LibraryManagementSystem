@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book information, formats, and availability at Calgary Public Library.">
+    <title>Book Details | Calgary Public Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="book-details-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Calgary Public Library home">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span class="brand-name">Calgary Public Library</span>
+        </a>
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="active" href="Browse.html">Browse</a>
+            <a href="Events.html">Events</a>
+        </nav>
+        <a class="account-button" href="index.html#account"><span class="user-icon" aria-hidden="true">♙</span> Sign in / My Account</a>
+    </header>
+
+    <main class="book-details-main">
+        <a class="back-to-results" href="Browse.html">← Back to Browse</a>
+        <article class="book-detail-card">
+            <div class="book-detail-left">
+                <div class="book-detail-cover">
+                    <img src="images/To%20kill%20a%20mockingbird.jpg" alt="Cover of To Kill a Mockingbird by Harper Lee">
+                </div>
+                <section class="book-description" aria-labelledby="description-title">
+                    <h2 id="description-title">Book description</h2>
+                    <p>Scout Finch looks back on a childhood shaped by family, friendship, and a difficult case in her Alabama town. Through Scout’s eyes, the story explores fairness, empathy, and standing up for what is right.</p>
+                </section>
+            </div>
+
+            <div class="book-detail-info">
+                <p class="eyebrow">BOOK DETAILS</p>
+                <h1>To Kill a Mockingbird</h1>
+                <p class="book-detail-author">Harper Lee</p>
+
+                <div class="book-detail-rating">
+                    <span class="detail-stars" aria-label="4.26 out of 5 stars">★★★★★</span>
+                    <strong>4.26</strong>
+                    <button class="text-action" type="button">Rate this</button>
+                </div>
+
+                <button class="favourite-action" type="button" aria-pressed="false">
+                    <span aria-hidden="true">♡</span> Add to Saved Books
+                </button>
+
+                <section class="format-options" aria-labelledby="format-title">
+                    <h2 id="format-title">Choose a format</h2>
+                    <label class="format-select-label" for="book-format">Format</label>
+                    <div class="hold-controls">
+                        <select id="book-format" name="format">
+                            <option value="book">Book</option>
+                            <option value="ebook">eBook</option>
+                            <option value="audiobook">Audiobook</option>
+                        </select>
+                        <button class="place-hold-action" type="button">Place Hold</button>
+                    </div>
+                </section>
+
+                <button class="availability-action" type="button">View location &amp; availability <span aria-hidden="true">→</span></button>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="index.html">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span>Calgary Public Library</span>
+        </a>
+        <span>Curiosity lives here.</span>
+        <small>Library catalogue · CPSC 481</small>
+    </footer>
+</body>
+</html>
