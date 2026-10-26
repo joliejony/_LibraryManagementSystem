@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your Calgary Public Library account, borrowed items, holds, and saved books.">
+    <title>My Account | Calgary Public Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="my-account-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Calgary Public Library home">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span class="brand-name">Calgary Public Library</span>
+        </a>
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="Browse.html">Browse</a>
+            <a href="Events.html">Events</a>
+            <a class="active" href="MyAccount.html">My Account</a>
+        </nav>
+        <details class="account-menu">
+            <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
+            <div class="account-menu-panel">
+                <a href="Login.html">Sign in</a>
+                <a href="MyAccount.html">My Account</a>
+            </div>
+        </details>
+    </header>
+
+    <main class="my-account-main">
+        <section class="account-welcome" aria-labelledby="account-title">
+            <div>
+                <p class="eyebrow">MY LIBRARY</p>
+                <h1 id="account-title">Hello, Maria</h1>
+                <p class="library-card-number">Library card ending in <strong>3456</strong></p>
+                <label class="preferred-branch-control" for="preferred-branch">Preferred pickup branch
+                    <select id="preferred-branch" name="preferred-branch">
+                        <option value="Central Library">Central Library</option>
+                        <option value="Country Hills Library">Country Hills Library</option>
+                        <option value="Fish Creek Library">Fish Creek Library</option>
+                        <option value="Saddletowne Library">Saddletowne Library</option>
+                        <option value="Westbrook Library">Westbrook Library</option>
+                    </select>
+                </label>
+            </div>
+            <a class="account-browse-link" href="Browse.html">Browse the catalogue <span aria-hidden="true">→</span></a>
+        </section>
+
+        <section class="account-summary" aria-label="Account summary">
+            <article class="summary-card">
+                <span class="summary-icon" aria-hidden="true">▤</span>
+                <span class="summary-number">2</span>
+                <span class="summary-label">Items borrowed</span>
+            </article>
+            <article class="summary-card">
+                <span class="summary-icon" aria-hidden="true">◷</span>
+                <span class="summary-number">1</span>
+                <span class="summary-label">Item on hold</span>
+            </article>
+            <article class="summary-card">
+                <span class="summary-icon" aria-hidden="true">$</span>
+                <span class="summary-number">$0.00</span>
+                <span class="summary-label">Fines &amp; fees</span>
+            </article>
+        </section>
+
+        <section class="account-section" aria-labelledby="borrowed-title">
+            <div class="account-section-heading">
+                <div>
+                    <p class="eyebrow">YOUR CHECKOUTS</p>
+                    <h2 id="borrowed-title">Borrowed items</h2>
+                </div>
+                <button class="renew-all-button" type="button" data-open-renew>Renew all</button>
+            </div>
+            <p class="inline-feedback" id="renew-feedback" aria-live="polite"></p>
+            <article class="account-item-card" data-renew-item data-eligible="true">
+                <img class="account-item-cover" src="images/To%20kill%20a%20mockingbird.jpg" alt="Cover of To Kill a Mockingbird by Harper Lee">
+                <div class="account-item-info">
+                    <span class="format-tag">BOOK</span>
+                    <h3>To Kill a Mockingbird</h3>
+                    <p>Harper Lee</p>
+                    <p class="item-due-date"><span aria-hidden="true">◷</span> Due Oct 31 · 5 days left</p>
+                </div>
+                <div class="renewal-status">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Eligible for renewal</span>
+                </div>
+                <button class="renew-item-button" type="button">Renew item</button>
+            </article>
+            <article class="account-item-card" data-renew-item data-eligible="false">
+                <img class="account-item-cover" src="images/book1.jpg" alt="An open book on a stack of books">
+                <div class="account-item-info">
+                    <span class="format-tag">BOOK</span>
+                    <h3>The Midnight Library</h3>
+                    <p>Matt Haig</p>
+                    <p class="item-due-date">Due Nov 1 · 6 days left</p>
+                </div>
+                <div class="renewal-status is-ineligible"><span>Cannot renew · another reader has placed a hold</span></div>
+                <button class="renew-item-button" type="button" disabled>Cannot renew</button>
+            </article>
+        </section>
+
+        <section class="account-section" aria-labelledby="holds-title">
+            <div class="account-section-heading">
+                <div>
+                    <p class="eyebrow">IN YOUR QUEUE</p>
+                    <h2 id="holds-title">Items on hold</h2>
+                </div>
+            </div>
+            <article class="account-item-card hold-item-card">
+                <img class="account-item-cover" src="images/book1.jpg" alt="An open book on a stack of books">
+                <div class="account-item-info">
+                    <span class="format-tag">BOOK</span>
+                    <h3>The Midnight Library</h3>
+                    <p>Matt Haig</p>
+                    <p class="item-pickup-info">Pickup at <strong>Central Library</strong></p>
+                </div>
+                <div class="hold-status">
+                    <span class="hold-status-label">Ready for pickup</span>
+                    <span>Pick up by Nov 2</span>
+                </div>
+                <button class="secondary-action" type="button">Cancel hold</button>
+            </article>
+        </section>
+
+        <section class="account-section" aria-labelledby="saved-title">
+            <div class="account-section-heading">
+                <div>
+                    <p class="eyebrow">KEEP FOR LATER</p>
+                    <h2 id="saved-title">Saved Books</h2>
+                </div>
+                <a class="account-browse-link" href="Browse.html">Find more books <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="account-small-grid">
+                <article class="saved-book-card">
+                    <img src="images/To%20kill%20a%20mockingbird.jpg" alt="Cover of To Kill a Mockingbird by Harper Lee">
+                    <div><h3>To Kill a Mockingbird</h3><p>Harper Lee</p></div>
+                    <button class="remove-saved-button" type="button" data-remove-saved>Remove from Saved Books</button>
+                </article>
+                <article class="saved-book-card">
+                    <img src="images/book1.jpg" alt="An open book on a stack of books">
+                    <div><h3>The Midnight Library</h3><p>Matt Haig</p></div>
+                    <button class="remove-saved-button" type="button" data-remove-saved>Remove from Saved Books</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="account-section recently-read-section" aria-labelledby="recent-title">
+            <div class="account-section-heading">
+                <div>
+                    <p class="eyebrow">YOUR READING HISTORY</p>
+                    <h2 id="recent-title">Recently read</h2>
+                </div>
+            </div>
+            <div class="account-small-grid">
+                <article class="recent-book-card">
+                    <img src="images/book2.jpg" alt="A person choosing a book from a library shelf">
+                    <div><h3>Romeo and Juliet</h3><p>William Shakespeare</p></div>
+                    <button class="rate-now-button" type="button">Rate now</button>
+                </article>
+                <article class="recent-book-card">
+                    <img src="images/To%20kill%20a%20mockingbird.jpg" alt="Cover of To Kill a Mockingbird by Harper Lee">
+                    <div><h3>To Kill a Mockingbird</h3><p>Harper Lee</p></div>
+                    <button class="rate-now-button" type="button">Rate now</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <dialog class="prototype-dialog" id="renew-dialog" aria-labelledby="renew-dialog-title">
+        <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close">×</button></form>
+        <h2 id="renew-dialog-title">Review renewals</h2>
+        <p>These eligible items will be renewed. Items with another reader’s hold cannot be renewed.</p>
+        <ul class="renew-review-list"><li>To Kill a Mockingbird — eligible for renewal</li><li>The Midnight Library — cannot renew (another reader has placed a hold)</li></ul>
+        <form method="dialog" class="dialog-actions"><button class="secondary-action">Go back</button><button class="place-hold-action" value="confirm">Renew eligible items</button></form>
+    </dialog>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="index.html">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span>Calgary Public Library</span>
+        </a>
+        <span>Curiosity lives here.</span>
+        <small>Library catalogue · CPSC 481</small>
+    </footer>
+    <script src="prototype.js" defer></script>
+</body>
+</html>

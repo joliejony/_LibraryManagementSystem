@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choose a Calgary Public Library pickup location for your hold.">
+    <title>Place a Hold | Calgary Public Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="place-hold-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Calgary Public Library home">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span class="brand-name">Calgary Public Library</span>
+        </a>
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="active" href="Browse.html">Browse</a>
+            <a href="Events.html">Events</a>
+        </nav>
+        <details class="account-menu">
+            <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
+            <div class="account-menu-panel">
+                <a href="Login.html">Sign in</a>
+                <a href="MyAccount.html">My Account</a>
+            </div>
+        </details>
+    </header>
+
+    <main class="place-hold-main">
+        <a class="back-to-results" href="BookDetails.html">← Back to book details</a>
+        <h1>Place a Hold</h1>
+        <p class="place-hold-intro">Choose where you would like to pick up your book.</p>
+
+        <div class="place-hold-layout">
+            <article class="hold-book-summary" aria-labelledby="hold-book-title">
+                <img src="images/To%20kill%20a%20mockingbird.jpg" alt="Cover of To Kill a Mockingbird by Harper Lee">
+                <div class="hold-book-info">
+                    <p class="eyebrow">SELECTED BOOK</p>
+                    <h2 id="hold-book-title">To Kill a Mockingbird</h2>
+                    <p class="hold-book-author">Harper Lee</p>
+                    <p class="catalogue-rating" aria-label="Rated 4.26 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.26</p>
+                    <p class="hold-book-format">Format: selected on the book details page</p>
+                    <button class="favourite-action" type="button" data-save-book aria-pressed="false">
+                        <span aria-hidden="true">♡</span> Add to Saved Books
+                    </button>
+                </div>
+            </article>
+
+            <section class="pickup-card" aria-labelledby="pickup-title">
+                <p class="eyebrow">PICKUP DETAILS</p>
+                <h2 id="pickup-title">Choose a pickup branch</h2>
+                <p class="pickup-description">Your account’s preferred branch is selected. You can choose another location below.</p>
+                <label for="pickup-branch">Pickup location</label>
+                <select id="pickup-branch" name="branch">
+                    <option value="Central Library" selected>Central Library · Preferred branch</option>
+                    <option value="Country Hills Library">Country Hills Library</option>
+                    <option value="Fish Creek Library">Fish Creek Library</option>
+                    <option value="Saddletowne Library">Saddletowne Library</option>
+                    <option value="Westbrook Library">Westbrook Library</option>
+                </select>
+                <button class="confirm-hold-button" type="button" data-confirm-hold>Place Hold <span aria-hidden="true">→</span></button>
+                <p class="inline-feedback" data-hold-feedback aria-live="polite"></p>
+                <a class="cancel-hold-link" href="BookDetails.html">Back</a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="index.html">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span>Calgary Public Library</span>
+        </a>
+        <span>Curiosity lives here.</span>
+        <small>Library catalogue · CPSC 481</small>
+    </footer>
+    <script src="prototype.js" defer></script>
+</body>
+</html>

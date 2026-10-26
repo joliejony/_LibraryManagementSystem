@@ -1,67 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Upcoming Events</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body class="events-page">
-        <header class="site-header">
-            <a class="brand" href="index.html" aria-label="Calgary Public Library home"><span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image" /></span><span class="brand-name">Calgary Public Library</span></a>
-            <nav class="navigation" aria-label="Main navigation">
-                <a href="index.html">Home</a>
-                <a href="Browse.html">Browse</a>
-                <a class="active" href="Events.html">Events</a>
-            </nav>
-            <details class="account-menu">
-            <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
-            <div class="account-menu-panel">
-                <a href="Login.html">Sign in</a>
-                <span class="account-menu-disabled" aria-disabled="true">My Account <small>Coming soon</small></span>
-            </div>
-        </details>
-        </header>
-        <header class="events-banner">
-            <h1>Upcoming Events</h1>
-        </header>
-        <main>
-            <section class="event">
-                <h2>Event 1: Book Club</h2>
-                <p>Date: November 15, 2026</p>
-                <p>Location: Country Hills Library</p>
-                <p>Description: Join fellow readers at the library for a lively discussion of this month's featured book.</p>
-                <a class="event-register" href="#register">Register for event <span aria-hidden="true">→</span></a>
-            </section>
-
-            <section class="event">
-                <h2>Event 2: Math Help Tutoring</h2>
-                <p>Date: December 6, 2026</p>
-                <p>Location: Central Library</p>
-                <p>Description: Get free math help from friendly tutors. Bring your questions, assignments, and calculator.</p>
-                <a class="event-register" href="#register">Register for event <span aria-hidden="true">→</span></a>
-            </section>
-
-            <section class="event">
-                <h2>Event 3: Newcomer Welcome Session</h2>
-                <p>Date: December 12, 2026</p>
-                <p>Location: South Library</p>
-                <p>Description: Meet other newcomers, learn about library services, and discover helpful community resources.</p>
-                <a class="event-register" href="#register">Register for event <span aria-hidden="true">→</span></a>
-            </section>
-
-            <!-- Add more events as needed -->
-        </main>
-        <footer>
-            <p>&copy; 2024 Event Management Company. All rights reserved.</p>
-        </footer>
-
-
-
-
-
-
-
-
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find library events by location, event type, and audience.">
+    <title>Upcoming Events | Calgary Public Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="prototype.js" defer></script>
+</head>
+<body class="events-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Calgary Public Library home"><span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span><span class="brand-name">Calgary Public Library</span></a>
+        <nav class="navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="Browse.html">Browse</a><a class="active" href="Events.html">Events</a></nav>
+        <details class="account-menu"><summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary><div class="account-menu-panel"><a href="Login.html">Sign in</a><a href="MyAccount.html">My Account</a></div></details>
+    </header>
+    <main class="events-main">
+        <header class="events-banner"><p class="eyebrow">YOUR LIBRARY, YOUR COMMUNITY</p><h1>Upcoming Events</h1><p>Find a program that fits your schedule and interests.</p></header>
+        <section class="event-filters" aria-labelledby="event-filter-title">
+            <h2 id="event-filter-title">Narrow your search</h2>
+            <label>Branch
+                <select data-event-filter="branch"><option value="all">All branches</option><option>Central Library</option><option>Country Hills Library</option><option>South Library</option></select>
+            </label>
+            <label>Event type
+                <select data-event-filter="type"><option value="all">All types</option><option value="Book club">Book club</option><option value="Tutoring">Tutoring</option><option value="Welcome session">Welcome session</option></select>
+            </label>
+            <label>Audience
+                <select data-event-filter="audience"><option value="all">All audiences</option><option value="Adults">Adults</option><option value="Teens">Teens</option><option value="Families">Families</option></select>
+            </label>
+            <button class="event-filter-reset" type="button" data-reset-events>Clear filters</button>
+        </section>
+        <p class="event-result-count" data-event-count aria-live="polite">3 events</p>
+        <div class="event-listing-grid" id="event-list">
+            <article class="event" data-branch="Country Hills Library" data-type="Book club" data-audience="Adults">
+                <p class="event-kind">ADULTS · BOOK CLUB</p><h2>Community Book Club</h2>
+                <p><strong>Date:</strong> November 15, 2026 · 2:00 PM</p><p><strong>Location:</strong> Country Hills Library</p>
+                <p>Join fellow readers for a relaxed discussion of this month’s selected novel.</p>
+                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 8. Registration is required. Open to adults; book-club title is available to borrow or request.</p></details>
+                <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+            </article>
+            <article class="event" data-branch="Central Library" data-type="Tutoring" data-audience="Teens">
+                <p class="event-kind">TEENS · DROP IN</p><h2>Math Help Tutoring</h2>
+                <p><strong>Date:</strong> December 6, 2026 · 4:00 PM</p><p><strong>Location:</strong> Central Library</p>
+                <p>Get free math help from friendly tutors. Bring your questions and assignments.</p>
+                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 5. Drop in; registration is not required. Designed for teens. Bring your current homework or study questions.</p></details>
+                <button class="event-register" type="button" data-register-event>View event details <span aria-hidden="true">→</span></button>
+            </article>
+            <article class="event" data-branch="South Library" data-type="Welcome session" data-audience="Families">
+                <p class="event-kind">ADULTS · COMMUNITY</p><h2>Newcomer Welcome Session</h2>
+                <p><strong>Date:</strong> December 12, 2026 · 11:00 AM</p><p><strong>Location:</strong> South Library</p>
+                <p>Meet other newcomers, learn about library services, and discover community resources.</p>
+                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 12. Registration is recommended. Open to newcomers and their families; no library card is needed to attend.</p></details>
+                <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+            </article>
+        </div>
+        <p class="event-prototype-note">Event dates and availability are sample information for this project prototype.</p>
+        <p class="inline-feedback" data-event-feedback aria-live="polite"></p>
+    </main>
+    <footer class="site-footer"><a class="footer-brand" href="index.html"><span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span><span>Calgary Public Library</span></a><span>Curiosity lives here.</span><small>Library catalogue · CPSC 481</small></footer>
+</body>
 </html>

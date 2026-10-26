@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check To Kill a Mockingbird availability at Calgary Public Library locations.">
+    <title>Book Availability | Calgary Public Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="availability-page">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Calgary Public Library home">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span class="brand-name">Calgary Public Library</span>
+        </a>
+        <nav class="navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="active" href="Browse.html">Browse</a>
+            <a href="Events.html">Events</a>
+        </nav>
+        <details class="account-menu">
+            <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
+            <div class="account-menu-panel">
+                <a href="Login.html">Sign in</a>
+                <a href="MyAccount.html">My Account</a>
+            </div>
+        </details>
+    </header>
+
+    <main class="availability-main">
+        <a class="back-to-results" href="BookDetails.html">← Back to book details</a>
+        <p class="eyebrow">LIBRARY CATALOGUE</p>
+        <h1>Book Availability</h1>
+
+        <section class="availability-book-card" aria-labelledby="availability-book-title">
+            <img src="images/To%20kill%20a%20mockingbird.jpg" alt="Cover of To Kill a Mockingbird by Harper Lee">
+            <div class="availability-book-info">
+                <h2 id="availability-book-title">To Kill a Mockingbird</h2>
+                <p>Harper Lee</p>
+                <p class="catalogue-rating" aria-label="Rated 4.26 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.26</p>
+            </div>
+            <div class="availability-summary">
+                <span class="availability-summary-dot" aria-hidden="true"></span>
+                <strong>Available</strong>
+                <small>At 1 of 3 locations</small>
+            </div>
+        </section>
+
+        <section class="branch-availability" aria-labelledby="branch-availability-title">
+            <div class="branch-heading">
+                <div>
+                    <p class="eyebrow">CHECK YOUR LOCAL LIBRARY</p>
+                    <h2 id="branch-availability-title">Copies by location</h2>
+                </div>
+                <span class="branch-count">3 locations</span>
+            </div>
+            <div class="availability-table-wrap">
+                <table class="availability-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Location</th>
+                            <th scope="col">Collection</th>
+                            <th scope="col">Call number</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Country Hills Library</th>
+                            <td data-label="Collection">Adult Fiction</td>
+                            <td data-label="Call number">FIC LEE</td>
+                            <td data-label="Status"><span class="copy-status is-available">Available now</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Harvest Hills Library</th>
+                            <td data-label="Collection">Adult Fiction</td>
+                            <td data-label="Call number">FIC LEE</td>
+                            <td data-label="Status"><span class="copy-status is-checked-out">Checked out</span><small class="status-note">Expected back Nov 4</small></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Sage Hill Library</th>
+                            <td data-label="Collection">Adult Fiction</td>
+                            <td data-label="Call number">FIC LEE</td>
+                            <td data-label="Status"><span class="copy-status is-on-hold">On hold for another user</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="availability-note">Availability shown here is sample information for the project prototype.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="index.html">
+            <span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span>
+            <span>Calgary Public Library</span>
+        </a>
+        <span>Curiosity lives here.</span>
+        <small>Library catalogue · CPSC 481</small>
+    </footer>
+</body>
+</html>

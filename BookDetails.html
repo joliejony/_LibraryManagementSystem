@@ -22,7 +22,7 @@
             <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
             <div class="account-menu-panel">
                 <a href="Login.html">Sign in</a>
-                <span class="account-menu-disabled" aria-disabled="true">My Account <small>Coming soon</small></span>
+                <a href="MyAccount.html">My Account</a>
             </div>
         </details>
     </header>
@@ -48,29 +48,47 @@
                 <div class="book-detail-rating">
                     <span class="detail-stars" aria-label="4.26 out of 5 stars">★★★★★</span>
                     <strong>4.26</strong>
-                    <button class="text-action" type="button">Rate this</button>
+                    <button class="text-action" type="button" data-open-rating>Rate this</button>
                 </div>
+                <p class="rating-privacy">Ratings are public and appear with the book’s average. Do not include personal information.</p>
 
-                <button class="favourite-action" type="button" aria-pressed="false">
+                <button class="favourite-action" type="button" data-save-book aria-pressed="false">
                     <span aria-hidden="true">♡</span> Add to Saved Books
                 </button>
 
                 <section class="format-options" aria-labelledby="format-title">
                     <h2 id="format-title">Choose a format</h2>
                     <label class="format-select-label" for="book-format">Format</label>
-                    <div class="hold-controls">
+                    <form class="hold-controls" action="PlaceHold.html" method="get">
                         <select id="book-format" name="format">
                             <option value="book">Book</option>
                             <option value="ebook">eBook</option>
                             <option value="audiobook">Audiobook</option>
                         </select>
-                        <button class="place-hold-action" type="button">Place Hold</button>
-                    </div>
+                        <button class="place-hold-action" type="submit">Place Hold</button>
+                    </form>
                 </section>
 
-                <button class="availability-action" type="button">View location &amp; availability <span aria-hidden="true">→</span></button>
+                <a class="availability-action" href="BookAvailability.html">View location &amp; availability <span aria-hidden="true">→</span></a>
             </div>
         </article>
+        <dialog class="prototype-dialog" id="rating-dialog" aria-labelledby="rating-dialog-title">
+            <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close">×</button></form>
+            <h2 id="rating-dialog-title">Rate this book</h2>
+            <p>Your rating will be public and included in the book’s average rating.</p>
+            <form id="rating-form">
+                <fieldset class="rating-options">
+                    <legend>Choose a rating</legend>
+                    <label><input type="radio" name="rating" value="1" aria-label="1 star" required><span aria-hidden="true">★</span></label>
+                    <label><input type="radio" name="rating" value="2" aria-label="2 stars"><span aria-hidden="true">★★</span></label>
+                    <label><input type="radio" name="rating" value="3" aria-label="3 stars"><span aria-hidden="true">★★★</span></label>
+                    <label><input type="radio" name="rating" value="4" aria-label="4 stars"><span aria-hidden="true">★★★★</span></label>
+                    <label><input type="radio" name="rating" value="5" aria-label="5 stars"><span aria-hidden="true">★★★★★</span></label>
+                </fieldset>
+                <button class="place-hold-action" type="submit">Submit rating</button>
+                <p class="inline-feedback" id="rating-feedback" aria-live="polite"></p>
+            </form>
+        </dialog>
     </main>
 
     <footer class="site-footer">
@@ -81,5 +99,6 @@
         <span>Curiosity lives here.</span>
         <small>Library catalogue · CPSC 481</small>
     </footer>
+    <script src="prototype.js" defer></script>
 </body>
 </html>
