@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function getBookImage(button) {
         const card = button.closest("article, .book-detail-card, .hold-book-summary");
-        return card?.querySelector("img")?.getAttribute("src") || "images/book1.jpg";
+        return card?.querySelector("img")?.getAttribute("src") || "images/cover-placeholder.jpg";
     }
 
     function syncSaveButtons() {
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (savedGrid && !getStorage(savedKey)) {
         const initial = [...savedGrid.querySelectorAll(".saved-book-card")].map((card) => ({
             title: card.querySelector("h3")?.textContent.trim(),
-            image: card.querySelector("img")?.getAttribute("src") || "images/book1.jpg"
+            image: card.querySelector("img")?.getAttribute("src") || "images/cover-placeholder.jpg"
         })).filter((book) => book.title);
         writeSaved(initial);
     }
