@@ -39,21 +39,6 @@ All behaviour lives in `prototype.js`:
 
 Saved Books and the preferred branch are stored in the browser's `localStorage`, so they stay between pages and visits on the same browser. If the browser blocks storage (some do for files opened directly from disk), they're kept only until the page is closed. To reset them, clear the site data in your browser.
 
-## Project structure
-
-```
-index.html            Home page
-Browse.html           Catalogue search results
-BookDetails.html      Single book details
-BookAvailability.html Branch availability
-PlaceHold.html        Place a hold
-MyAccount.html        Member account
-Events.html           Events listing
-Login.html            Sign-in screen
-style.css             Styles for every page
-prototype.js          Shared interactions
-images/               Book covers, photos, backgrounds and logo
-```
 
 ## Images
 
