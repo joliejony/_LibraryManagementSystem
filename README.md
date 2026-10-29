@@ -40,9 +40,3 @@ All behaviour lives in `prototype.js`:
 Saved Books and the preferred branch are stored in the browser's `localStorage`, so they stay between pages and visits on the same browser. If the browser blocks storage (some do for files opened directly from disk), they're kept only until the page is closed. To reset them, clear the site data in your browser.
 
 
-## Images
-
-- Book cover images are named after the book (for example `images/kill-joy.jpg`). To use a different cover, save it under the same filename and it replaces the old one without code changes.
-- `images/cover-placeholder.jpg` is shown when a saved book has no cover.
-- File names are case-sensitive on most web hosts, including GitHub Pages, so the name in the HTML must match the file exactly (`LittleWomen.jpg` is not `littlewomen.jpg`).
-- Only use photos you are allowed to use, such as free photos from Unsplash or Pexels. Don't use stock photos that carry a watermark.
