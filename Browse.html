@@ -35,7 +35,7 @@
             <div class="browse-banner-inner">
                 <p class="eyebrow">LIBRARY CATALOG</p>
                 <h1 id="browse-title">Find your next favourite.</h1>
-                <p class="browse-prompt">Search by title, author, or topic.</p>
+                <p class="browse-prompt">Search by title, author, or topic, then narrow by age group and format.</p>
             </div>
 
             <div class="browse-controls">
@@ -46,16 +46,41 @@
                     <button type="submit">Search</button>
                 </form>
 
-                <div class="catalogue-filters" aria-label="Catalogue filters">
-                    <button class="selected" type="button" aria-pressed="true">All</button>
-                    <button type="button" aria-pressed="false">Book</button>
-                    <button type="button" aria-pressed="false">eBook</button>
-                    <button type="button" aria-pressed="false">Audiobook</button>
-                    <span class="filter-divider" aria-hidden="true"></span>
-                    <button type="button" aria-pressed="false">Kids</button>
-                    <button type="button" aria-pressed="false">Teens</button>
-                    <button type="button" aria-pressed="false">Adults</button>
-                </div>
+                <section class="catalogue-filter-bar" aria-labelledby="catalogue-filter-title">
+                    <h2 id="catalogue-filter-title">Filter results</h2>
+                    <label>Age group
+                        <select data-catalogue-filter="age">
+                            <option value="all">All ages</option>
+                            <option value="kids">Kids (ages 0–7)</option>
+                            <option value="middle">Middle grade (ages 8–12)</option>
+                            <option value="teens">Teens (ages 13–17)</option>
+                            <option value="adults">Adults (18+)</option>
+                        </select>
+                    </label>
+                    <label>Format
+                        <select data-catalogue-filter="format">
+                            <option value="all">All formats</option>
+                            <option value="book">Book</option>
+                            <option value="ebook">eBook</option>
+                            <option value="audiobook">Audiobook</option>
+                        </select>
+                    </label>
+                    <label>Availability
+                        <select data-catalogue-filter="availability">
+                            <option value="all">Any availability</option>
+                            <option value="available">Available now</option>
+                            <option value="waitlist">Waitlist (place a hold)</option>
+                        </select>
+                    </label>
+                    <label>Sort by
+                        <select data-catalogue-sort>
+                            <option value="relevance">Relevance</option>
+                            <option value="rating">Highest rated</option>
+                            <option value="title">Title A–Z</option>
+                        </select>
+                    </label>
+                    <button class="catalogue-filter-reset" type="button" data-reset-catalogue>Clear filters</button>
+                </section>
 
             </div>
         </header>
@@ -63,15 +88,15 @@
         <section class="catalogue" aria-label="Library catalogue search results">
             <div class="results-heading">
                 <h2>Search results</h2>
-                <p><strong>3</strong> results</p>
+                <p data-catalogue-count aria-live="polite"><strong>11</strong> results</p>
             </div>
             <div class="catalogue-results" id="catalogue-results">
-                <article class="catalogue-card">
+                <article class="catalogue-card" data-age="adults" data-format="book" data-availability="available" data-rating="4.8" data-order="0" data-keywords="to kill a mockingbird harper lee classic fiction">
                     <a class="catalogue-cover" href="BookDetails.html" aria-label="View To Kill a Mockingbird details">
                         <img src="images/To%20kill%20a%20mockingbird.jpg" alt="Cover of To Kill a Mockingbird by Harper Lee">
                     </a>
                     <div class="catalogue-info">
-                        <div class="format-labels"><span>BOOK</span><span>ADULT</span></div>
+                        <div class="format-labels"><span>BOOK</span><span>ADULTS · 18+</span></div>
                         <h3><a href="BookDetails.html">To Kill a Mockingbird</a></h3>
                         <p class="catalogue-author">by Harper Lee</p>
                         <p class="catalogue-rating" aria-label="Rated 4.8 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.8 <small>reader rating</small></p>
@@ -86,12 +111,12 @@
                     </div>
                 </article>
 
-                <article class="catalogue-card">
+                <article class="catalogue-card" data-age="adults" data-format="book" data-availability="available" data-rating="4.6" data-order="1" data-keywords="killers of the flower moon david grann true crime history">
                     <div class="catalogue-cover">
                         <img src="images/killers-of-the-flower-moon.jpg" alt="Cover of Killers of the Flower Moon by David Grann">
                     </div>
                     <div class="catalogue-info">
-                        <div class="format-labels"><span>BOOK</span><span>ADULT</span></div>
+                        <div class="format-labels"><span>BOOK</span><span>ADULTS · 18+</span></div>
                         <h3>Killers of the Flower Moon</h3>
                         <p class="catalogue-author">by David Grann</p>
                         <p class="catalogue-rating" aria-label="Rated 4.6 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.6 <small>reader rating</small></p>
@@ -106,12 +131,12 @@
                     </div>
                 </article>
 
-                <article class="catalogue-card">
+                <article class="catalogue-card" data-age="teens" data-format="ebook" data-availability="available" data-rating="4.7" data-order="2" data-keywords="kill joy holly jackson mystery">
                     <div class="catalogue-cover">
                         <img src="images/kill-joy.jpg" alt="Cover of Kill Joy by Holly Jackson">
                     </div>
                     <div class="catalogue-info">
-                        <div class="format-labels"><span>EBOOK</span><span>TEENS</span></div>
+                        <div class="format-labels"><span>EBOOK</span><span>TEENS · AGES 13–17</span></div>
                         <h3>Kill Joy</h3>
                         <p class="catalogue-author">by Holly Jackson</p>
                         <p class="catalogue-rating" aria-label="Rated 4.7 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.7 <small>reader rating</small></p>
@@ -125,6 +150,170 @@
                         <button class="catalogue-favourite" type="button" data-save-book aria-label="Add Kill Joy to Saved Books" aria-pressed="false">♡</button>
                     </div>
                 </article>
+
+                <article class="catalogue-card" data-age="adults" data-format="book" data-availability="waitlist" data-rating="4.2" data-order="3" data-keywords="the midnight library matt haig fiction fantasy">
+                    <div class="catalogue-cover">
+                        <img src="images/themidnightlib.jpg" alt="Cover of The Midnight Library by Matt Haig">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>BOOK</span><span>ADULTS · 18+</span></div>
+                        <h3>The Midnight Library</h3>
+                        <p class="catalogue-author">by Matt Haig</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.2 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.2 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability is-waitlist"><i></i>All copies out · 4 waiting</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> 6 locations</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Place hold</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add The Midnight Library to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card" data-age="adults" data-format="audiobook" data-availability="available" data-rating="4.4" data-order="4" data-keywords="atomic habits james clear self-help nonfiction">
+                    <div class="catalogue-cover">
+                        <img src="images/atomic%20habbit.jpg" alt="Cover of Atomic Habits by James Clear">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>AUDIOBOOK</span><span>ADULTS · 18+</span></div>
+                        <h3>Atomic Habits</h3>
+                        <p class="catalogue-author">by James Clear</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.4 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.4 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Listen today</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> Online</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add Atomic Habits to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card" data-age="adults" data-format="book" data-availability="available" data-rating="4.1" data-order="5" data-keywords="the thursday murder club richard osman mystery">
+                    <div class="catalogue-cover">
+                        <img src="images/thursday_murder.jpg" alt="Cover of The Thursday Murder Club by Richard Osman">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>BOOK</span><span>ADULTS · 18+</span></div>
+                        <h3>The Thursday Murder Club</h3>
+                        <p class="catalogue-author">by Richard Osman</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.1 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.1 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Available</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> 7 locations</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add The Thursday Murder Club to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card" data-age="teens" data-format="ebook" data-availability="available" data-rating="4.0" data-order="6" data-keywords="romeo and juliet william shakespeare classic play drama">
+                    <div class="catalogue-cover">
+                        <img src="images/romeo%26juliet.jpg" alt="Cover of Romeo and Juliet by William Shakespeare">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>EBOOK</span><span>TEENS · AGES 13–17</span></div>
+                        <h3>Romeo and Juliet</h3>
+                        <p class="catalogue-author">by William Shakespeare</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.0 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.0 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Available now</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> Online</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add Romeo and Juliet to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card" data-age="middle" data-format="book" data-availability="waitlist" data-rating="4.3" data-order="7" data-keywords="little women louisa may alcott classic fiction">
+                    <div class="catalogue-cover">
+                        <img src="images/LittleWomen.jpg" alt="Cover of Little Women by Louisa May Alcott">
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>BOOK</span><span>MIDDLE GRADE · AGES 8–12</span></div>
+                        <h3>Little Women</h3>
+                        <p class="catalogue-author">by Louisa May Alcott</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.3 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.3 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability is-waitlist"><i></i>All copies out · 2 waiting</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> 4 locations</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Place hold</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add Little Women to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card" data-age="middle" data-format="audiobook" data-availability="available" data-rating="4.5" data-order="8" data-keywords="charlotte’s web e. b. white animals classic charlottes web">
+                    <div class="catalogue-cover">
+                        <span class="generated-cover cover-green" role="img" aria-label="Cover of Charlotte’s Web by E. B. White"><strong>Charlotte’s Web</strong><small>E. B. White</small></span>
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>AUDIOBOOK</span><span>MIDDLE GRADE · AGES 8–12</span></div>
+                        <h3>Charlotte’s Web</h3>
+                        <p class="catalogue-author">by E. B. White</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.5 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.5 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Listen today</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> Online</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add Charlotte’s Web to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card" data-age="kids" data-format="ebook" data-availability="available" data-rating="4.6" data-order="9" data-keywords="where the wild things are maurice sendak picture book">
+                    <div class="catalogue-cover">
+                        <span class="generated-cover cover-orange" role="img" aria-label="Cover of Where the Wild Things Are by Maurice Sendak"><strong>Where the Wild Things Are</strong><small>Maurice Sendak</small></span>
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>EBOOK</span><span>KIDS · AGES 0–7</span></div>
+                        <h3>Where the Wild Things Are</h3>
+                        <p class="catalogue-author">by Maurice Sendak</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.6 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.6 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Available now</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> Online</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add Where the Wild Things Are to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+
+                <article class="catalogue-card" data-age="kids" data-format="book" data-availability="available" data-rating="4.7" data-order="10" data-keywords="the very hungry caterpillar eric carle picture book board book">
+                    <div class="catalogue-cover">
+                        <span class="generated-cover cover-blue" role="img" aria-label="Cover of The Very Hungry Caterpillar by Eric Carle"><strong>The Very Hungry Caterpillar</strong><small>Eric Carle</small></span>
+                    </div>
+                    <div class="catalogue-info">
+                        <div class="format-labels"><span>BOOK</span><span>KIDS · AGES 0–7</span></div>
+                        <h3>The Very Hungry Caterpillar</h3>
+                        <p class="catalogue-author">by Eric Carle</p>
+                        <p class="catalogue-rating" aria-label="Rated 4.7 out of 5 stars"><span aria-hidden="true">★★★★★</span> 4.7 <small>reader rating</small></p>
+                        <div class="availability-row">
+                            <span class="item-availability"><i></i>Available</span>
+                            <span class="location-indicator"><span aria-hidden="true">⌖</span> 9 locations</span>
+                        </div>
+                    </div>
+                    <div class="catalogue-actions">
+                        <button class="borrow-button" type="button">Borrow</button>
+                        <button class="catalogue-favourite" type="button" data-save-book aria-label="Add The Very Hungry Caterpillar to Saved Books" aria-pressed="false">♡</button>
+                    </div>
+                </article>
+            </div>
+            <div class="catalogue-empty" data-catalogue-empty hidden>
+                <p><strong>No books match these filters.</strong> Try another age group or format, or clear the filters.</p>
+                <button class="catalogue-filter-reset" type="button" data-reset-catalogue>Clear filters</button>
             </div>
         </section>
     </main>

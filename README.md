@@ -18,7 +18,7 @@ All pages link to each other from the navigation bar. If you use VS Code, the **
 | Page | File | What it shows |
 | --- | --- | --- |
 | Home | `index.html` | Search, browse by audience (kids, teens, adults, eBooks), staff picks and upcoming events |
-| Browse | `Browse.html` | Catalogue search results with format labels, ratings, availability, Borrow and Save |
+| Browse | `Browse.html` | Catalogue search with age-group, format and availability filters, sorting, ratings, Borrow and Save |
 | Book details | `BookDetails.html` | Full details for a title (*To Kill a Mockingbird*), with rating and saving |
 | Book availability | `BookAvailability.html` | Which branches have a copy |
 | Place a hold | `PlaceHold.html` | Choosing a pickup branch and confirming a hold |
@@ -31,6 +31,7 @@ All pages link to each other from the navigation bar. If you use VS Code, the **
 
 All behaviour lives in `prototype.js`:
 
+- **Browse filters:** dropdowns for age group (Kids 0–7, Middle grade 8–12, Teens 13–17, Adults 18+), format and availability, plus sorting and a text search. The result count updates, and a message appears when nothing matches. The Kids/Teens/Adults/eBooks links on Home open Browse already filtered (e.g. `Browse.html?age=kids`).
 - **Saved Books:** the heart button on any book adds or removes it, and the list on My Account updates to match. A saved book shows "Saved" instead of offering to save it again.
 - **Preferred branch:** the branch chosen on My Account is pre-selected as the pickup branch when placing a hold.
 - **Renewals:** renew single items or use **Renew all**. Items with another reader's hold can't be renewed.

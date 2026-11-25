@@ -3503,3 +3503,72 @@ a {
     .help-page .help-inner { grid-template-columns: 1fr; }
 }
 .login-error.is-info { border-color: #c5d6d9; border-left-color: var(--blue); background: #eef4f5; color: var(--blue-deep); }
+
+/* Browse: age-group and format filtering */
+.catalogue-filter-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+    align-items: end;
+    gap: 14px;
+    max-width: 900px;
+    margin: 18px 0 28px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #fff;
+}
+
+.catalogue-filter-bar h2 {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: var(--blue-deep);
+    font: 600 20px / 1.2 var(--serif);
+}
+
+.catalogue-filter-bar label { display: grid; gap: 5px; color: #52636a; font-size: 11px; font-weight: 700; }
+.catalogue-filter-bar select { min-height: 42px; padding: 8px 10px; border: 1px solid #cbd7d5; border-radius: 5px; background: #fff; color: var(--ink); font: 12px var(--sans); }
+.catalogue-filter-bar select.is-active { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+.catalogue-filter-reset { min-height: 42px; padding: 8px 12px; border: 1px solid #cbd7d5; border-radius: 5px; background: #fff; color: var(--blue); font: 700 11px var(--sans); cursor: pointer; }
+.catalogue-filter-reset:hover { background: #f2f6f4; }
+.catalogue-card[hidden], .catalogue-empty[hidden] { display: none; }
+
+.catalogue-empty {
+    max-width: 900px;
+    padding: 28px;
+    border: 1px dashed #cbd7d5;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+.catalogue-empty strong { display: block; margin-bottom: 4px; color: var(--blue-deep); }
+.item-availability.is-waitlist { color: #9a6a2e; }
+.item-availability.is-waitlist i { background: #e2a04f; }
+
+.generated-cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 10px 8px;
+    color: #fff;
+    text-align: left;
+}
+
+.generated-cover strong { font: 600 13px / 1.15 var(--serif); }
+.generated-cover small { font-size: 8px; font-weight: 700; letter-spacing: .4px; opacity: .85; }
+.generated-cover.cover-green { background: linear-gradient(160deg, #4e7659, #2f5040); }
+.generated-cover.cover-orange { background: linear-gradient(160deg, #ed9a55, #b26d3a); }
+.generated-cover.cover-blue { background: linear-gradient(160deg, #244d63, #17384b); }
+
+@media (max-width: 850px) {
+    .catalogue-filter-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+    .catalogue-filter-bar { grid-template-columns: 1fr; }
+    .catalogue-filter-bar h2 { grid-column: auto; }
+}
