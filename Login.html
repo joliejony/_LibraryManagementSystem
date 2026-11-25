@@ -19,21 +19,28 @@
             <h1 id="login-title">Welcome back</h1>
             <p class="login-intro">Sign in to your library account</p>
 
-            <form class="login-form">
+            <div class="login-error" role="alert" data-login-error hidden>
+                <strong>That card number or password doesn’t match.</strong>
+                <span>Check them and try again, or use <button class="login-text-button" type="button" data-forgot-password>Forgot password?</button> to reset your password.</span>
+            </div>
+
+            <form class="login-form" data-login-form novalidate>
                 <label for="library-id">Email or library card number</label>
                 <input id="library-id" name="library-id" type="text" autocomplete="username" placeholder="Enter your email or card number">
 
                 <div class="password-label-row">
                     <label for="login-password">Password</label>
-                    <button class="login-text-button" type="button">Forgot password?</button>
+                    <button class="login-text-button" type="button" data-forgot-password>Forgot password?</button>
                 </div>
                 <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password">
 
-                <button class="login-submit" type="button">Log in <span aria-hidden="true">→</span></button>
+                <button class="login-submit" type="submit">Log in <span aria-hidden="true">→</span></button>
             </form>
 
+            <p class="login-prototype-note">Prototype: use any card number with the password <strong>library</strong> to sign in. Any other password shows the error message.</p>
             <p class="create-account-prompt">New to the library? <button class="login-text-button" type="button">Create an account</button></p>
         </section>
     </main>
+    <script src="prototype.js" defer></script>
 </body>
 </html>

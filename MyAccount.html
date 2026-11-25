@@ -27,8 +27,9 @@
         <details class="account-menu">
             <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
             <div class="account-menu-panel">
-                <a href="Login.html">Sign in</a>
                 <a href="MyAccount.html">My Account</a>
+                <a href="Help.html">Help &amp; FAQ</a>
+                <a href="Login.html">Log out</a>
             </div>
         </details>
     </header>
@@ -60,8 +61,8 @@
             </article>
             <article class="summary-card">
                 <span class="summary-icon" aria-hidden="true">◷</span>
-                <span class="summary-number">1</span>
-                <span class="summary-label">Item on hold</span>
+                <span class="summary-number" data-hold-count>1</span>
+                <span class="summary-label" data-hold-count-label>Item on hold</span>
             </article>
             <article class="summary-card">
                 <span class="summary-icon" aria-hidden="true">$</span>
@@ -113,7 +114,9 @@
                     <h2 id="holds-title">Items on hold</h2>
                 </div>
             </div>
-            <article class="account-item-card hold-item-card">
+            <p class="inline-feedback" id="hold-feedback" aria-live="polite"></p>
+            <div class="account-hold-list" data-hold-list>
+            <article class="account-item-card hold-item-card" data-hold-card data-hold-title="Little Women">
                 <img class="account-item-cover" src="images/LittleWomen.jpg" alt="Cover of Little Women by Louisa May Alcott">
                 <div class="account-item-info">
                     <span class="format-tag">BOOK</span>
@@ -125,8 +128,23 @@
                     <span class="hold-status-label">Ready for pickup</span>
                     <span>Pick up by Nov 2</span>
                 </div>
-                <button class="secondary-action" type="button">Cancel hold</button>
+                <button class="secondary-action" type="button" data-cancel-hold>Cancel hold</button>
             </article>
+            </div>
+        </section>
+
+        <section class="account-section" aria-labelledby="events-title">
+            <div class="account-section-heading">
+                <div>
+                    <p class="eyebrow">YOUR CALENDAR</p>
+                    <h2 id="events-title">My events</h2>
+                </div>
+                <a class="account-browse-link" href="Events.html">Find more events <span aria-hidden="true">→</span></a>
+            </div>
+            <p class="inline-feedback" id="my-events-feedback" aria-live="polite"></p>
+            <div class="account-event-list" data-my-events>
+                <p class="saved-empty-state">You haven’t registered for any events yet. <a href="Events.html">Browse upcoming events</a>.</p>
+            </div>
         </section>
 
         <section class="account-section" aria-labelledby="saved-title">
@@ -187,6 +205,7 @@
             <span>Calgary Public Library</span>
         </a>
         <span>Curiosity lives here.</span>
+        <a class="footer-help-link" href="Help.html">Help &amp; FAQ</a>
         <small>Library catalogue · CPSC 481</small>
     </footer>
     <script src="prototype.js" defer></script>

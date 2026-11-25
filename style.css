@@ -3322,3 +3322,184 @@ a {
         padding: 12px;
     }
 }
+
+/* ------------------------------------------------------------------
+   Heuristic evaluation fixes (T06-4, Group 3)
+   ------------------------------------------------------------------ */
+
+/* Footer help link (heuristic 10) */
+.footer-help-link {
+    color: #e4edef;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footer-help-link:hover { text-decoration: underline; }
+
+/* Help & FAQ page */
+.help-page { min-height: 100vh; background: #fbfaf7; }
+
+.help-page-banner {
+    padding: 64px 5.5% 56px;
+    background:
+        linear-gradient(105deg, rgba(23, 56, 75, .97), rgba(36, 77, 99, .9)),
+        url('images/back%207.jpg') center / cover no-repeat;
+    color: #fff;
+    text-align: center;
+}
+
+.help-page-banner .eyebrow { margin: 0 0 9px; color: #f1bb8c; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; }
+.help-page-banner h1 { margin: 0; font: 600 clamp(36px, 5vw, 52px) / 1.1 var(--serif); letter-spacing: -.8px; }
+.help-page-banner > p:last-child { margin: 12px 0 0; color: #e2ebee; font-size: 14px; }
+.help-page .faq-block details { font-size: 13px; }
+.help-page .faq-block details p { font-size: 12px; line-height: 1.6; }
+.help-page .faq-block details a { color: var(--blue); font-weight: 700; }
+.help-page .help-topic-title { margin: 30px 0 10px; color: var(--blue-deep); font: 600 22px / 1.2 var(--serif); }
+.help-page .help-topic-title:first-child { margin-top: 0; }
+.help-page .faq-block details:has(+ .help-topic-title) { border-bottom: 1px solid #d4ddda; }
+.help-page .contact-block { align-self: start; }
+
+/* Log in error (heuristic 9) */
+.login-error {
+    display: grid;
+    gap: 4px;
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    border: 1px solid #e7b9a3;
+    border-left: 4px solid #b5533a;
+    border-radius: 6px;
+    background: #fdf1ec;
+    color: #7c3420;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.login-error[hidden] { display: none; }
+.login-error strong { font-size: 13px; }
+.login-error .login-text-button { font-size: inherit; text-decoration: underline; }
+.login-form input[aria-invalid="true"] { border-color: #b5533a; }
+.login-prototype-note { margin: 16px 0 0; color: var(--muted); font-size: 11px; text-align: center; }
+
+/* Rating: one row of five stars (heuristic 4) */
+.rating-options { display: block; }
+.rating-star-row { display: flex; gap: 4px; }
+.rating-options label span { display: block; color: #cfd6d7; font-size: 34px; line-height: 1; letter-spacing: 0; transition: transform .15s; }
+.rating-options label.is-filled span,
+.rating-options input:checked + span { color: #e2a04f; }
+.rating-options label:hover span { transform: scale(1.08); }
+.rating-options input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+.rating-value-label { margin: 8px 0 0; color: var(--blue-deep); font-size: 13px; font-weight: 700; }
+.rating-dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.rating-dialog-actions [hidden] { display: none; }
+
+/* Your rating on the book details page (heuristic 3) */
+.your-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 0;
+    color: #344b57;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.your-rating[hidden] { display: none; }
+.your-rating .detail-stars { font-size: 15px; }
+
+/* Place a Hold: chosen format, digital note and success state (heuristics 1 and 6) */
+.hold-book-format strong { color: var(--blue-deep); }
+.hold-book-format a { color: var(--blue); font-weight: 700; }
+.hold-format-warning { margin: 12px 0 0; color: #9a5b3d; font-size: 12px; font-weight: 700; }
+.hold-format-warning a { color: var(--blue); }
+.confirm-hold-button:disabled { background: #e7e9e8; color: #707b7c; cursor: not-allowed; transform: none; }
+[data-pickup-fields][hidden], [data-hold-form][hidden], .hold-success[hidden], .hold-format-warning[hidden] { display: none; }
+
+.hold-success:focus { outline: none; }
+.hold-success-title { display: flex; align-items: center; gap: 10px; }
+
+.hold-success-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e3efe6;
+    color: #356c48;
+    font: 700 17px var(--sans);
+}
+
+.hold-success-message { margin: 12px 0 20px; color: #42555d; font-size: 13px; line-height: 1.6; }
+.hold-success-message strong { color: var(--blue-deep); }
+.hold-success-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.hold-success-actions a { display: inline-flex; align-items: center; min-width: 0; padding: 11px 16px; font-size: 12px; text-decoration: none; }
+
+/* My Account: hold status, My events */
+.hold-status-label.is-waiting { color: #9a6a2e; }
+.account-hold-list, .account-event-list { display: grid; gap: 12px; }
+.account-event-list .event-date { width: 72px; }
+.account-event-list .saved-empty-state a, .account-hold-list .saved-empty-state a { color: var(--blue); font-weight: 700; }
+
+/* Events page: key facts first, fewer cards per row (heuristics 1, 3 and 8) */
+.event-listing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+
+.event-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+}
+
+.event-tag {
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #edf2f0;
+    color: #31586b;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.event-tag.is-required { background: #f8e3d4; color: #8a4a22; }
+.event-tag.is-recommended { background: #f8eee3; color: #a56035; }
+.event-tag.is-dropin { background: #e3efe6; color: #356c48; }
+.event-tag.is-full { background: #e7e9e8; color: #5c6669; }
+.event-tag.is-registered { background: #356c48; color: #fff; }
+.event-tag[hidden] { display: none; }
+
+.event-requirements[open] summary { margin-bottom: 4px; }
+.event-dropin-note { margin-top: 16px !important; color: #356c48 !important; font-weight: 700 !important; font-size: 12px !important; }
+.event-card-status:empty { display: none; }
+
+.event-card-status {
+    margin: 16px 0 0 !important;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: #e3efe6;
+    color: #2f5f3f !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1.5;
+}
+
+.event-card-status a { color: var(--blue); }
+.event-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.event-actions .text-action[hidden] { display: none; }
+.event-actions .event-register { margin-top: 18px; }
+.event-actions .text-action { margin-top: 18px; }
+.events-page .event-register.is-registered,
+.events-page .event-register:disabled { background: #e3efe6; color: #2f5f3f; cursor: default; transform: none; transition: none; }
+.events-page .event-register:disabled:not(.is-registered) { background: #e7e9e8; color: #707b7c; }
+.event-prototype-note a { color: var(--blue); font-weight: 700; }
+
+.event-confirm-list { display: grid; gap: 8px; margin: 16px 0; padding: 14px 16px; border-radius: 8px; background: #f4f7f5; }
+.event-confirm-list div { display: grid; grid-template-columns: 80px 1fr; gap: 10px; font-size: 13px; }
+.event-confirm-list dt { color: #52636a; font-weight: 700; }
+.event-confirm-list dd { margin: 0; color: var(--blue-deep); font-weight: 700; }
+
+@media (max-width: 600px) {
+    .event-listing-grid { grid-template-columns: 1fr; }
+    .help-page .help-inner { grid-template-columns: 1fr; }
+}
+.login-error.is-info { border-color: #c5d6d9; border-left-color: var(--blue); background: #eef4f5; color: var(--blue-deep); }

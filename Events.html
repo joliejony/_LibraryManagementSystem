@@ -11,9 +11,9 @@
 <body class="events-page">
     <header class="site-header">
         <a class="brand" href="index.html" aria-label="Calgary Public Library home"><span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span><span class="brand-name">Calgary Public Library</span></a>
-        <nav class="navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="Browse.html">Browse</a><a class="active" href="Events.html">Events</a></nav>
+        <nav class="navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="Browse.html">Browse</a><a class="active" href="Events.html">Events</a><a href="MyAccount.html">My Account</a></nav>
         <form class="nav-search" action="Browse.html" role="search"><label class="visually-hidden" for="nav-search-input">Search the catalogue</label><input id="nav-search-input" name="q" type="search" placeholder="Search"><button type="submit" aria-label="Search the catalogue">⌕</button></form>
-        <details class="account-menu"><summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary><div class="account-menu-panel"><a href="Login.html">Sign in</a><a href="MyAccount.html">My Account</a></div></details>
+        <details class="account-menu"><summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary><div class="account-menu-panel"><a href="MyAccount.html">My Account</a><a href="Help.html">Help &amp; FAQ</a><a href="Login.html">Log out</a></div></details>
     </header>
     <main class="events-main">
         <header class="events-banner"><p class="eyebrow">YOUR LIBRARY, YOUR COMMUNITY</p><h1>Upcoming Events</h1><p>Find a program that fits your schedule and interests.</p></header>
@@ -32,45 +32,89 @@
         </section>
         <p class="event-result-count" data-event-count aria-live="polite">5 events</p>
         <div class="event-listing-grid" id="event-list">
-            <article class="event" data-branch="Central Library" data-type="Story time" data-audience="Families">
+            <article class="event" data-event-id="story-time" data-branch="Central Library" data-type="Story time" data-audience="Families" data-registration="recommended" data-spots="20" data-date="October 18, 2026" data-time="11:00 AM" data-location="Central Library, Main Floor">
+                <ul class="event-tags" aria-label="Key facts">
+                    <li class="event-tag is-recommended">Registration recommended</li>
+                    <li class="event-tag is-spots" data-spots-left>20 spots left</li>
+                </ul>
                 <p class="event-kind">FAMILIES · IN PERSON</p><h2>Saturday Story Time</h2>
                 <p><strong>Date:</strong> October 18, 2026 · 11:00 AM</p><p><strong>Location:</strong> Central Library, Main Floor</p>
                 <p>Stories, songs, and a little imagination for young readers.</p>
-                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 20. Registration is recommended. Designed for young readers and their families.</p></details>
-                <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+                <details class="event-requirements"><summary>View details</summary><p>Registration is recommended so we can plan seating. Designed for young readers and their families.</p></details>
+                <p class="event-card-status" data-event-status aria-live="polite"></p>
+                <div class="event-actions">
+                    <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+                    <button class="text-action" type="button" data-cancel-event hidden>Cancel registration</button>
+                </div>
             </article>
-            <article class="event" data-branch="Central Library" data-type="Creative workshop" data-audience="Adults">
+            <article class="event" data-event-id="make-together" data-branch="Central Library" data-type="Creative workshop" data-audience="Adults" data-registration="dropin" data-spots="10" data-date="October 20, 2026" data-time="6:00 PM" data-location="Central Library, Create Space">
+                <ul class="event-tags" aria-label="Key facts">
+                    <li class="event-tag is-dropin">Drop-in · no registration needed</li>
+                    <li class="event-tag is-spots" data-spots-left>10 spaces</li>
+                </ul>
                 <p class="event-kind">ADULTS · DROP IN</p><h2>Make Something Together</h2>
                 <p><strong>Date:</strong> October 20, 2026 · 6:00 PM</p><p><strong>Location:</strong> Central Library, Create Space</p>
                 <p>Meet local makers and try a new creative practice.</p>
-                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 10. Drop in; registration is not required. Materials are provided.</p></details>
-                <button class="event-register" type="button" data-register-event>View event details <span aria-hidden="true">→</span></button>
+                <details class="event-requirements"><summary>View details</summary><p>Drop in any time during the session; registration is not required. Materials are provided. Spaces are first come, first served.</p></details>
+                <p class="event-dropin-note">No sign-up needed. Just come to the session.</p>
             </article>
-            <article class="event" data-branch="Country Hills Library" data-type="Book club" data-audience="Adults">
+            <article class="event" data-event-id="book-club" data-branch="Country Hills Library" data-type="Book club" data-audience="Adults" data-registration="required" data-spots="8" data-date="November 15, 2026" data-time="2:00 PM" data-location="Country Hills Library">
+                <ul class="event-tags" aria-label="Key facts">
+                    <li class="event-tag is-required">Registration required</li>
+                    <li class="event-tag is-spots" data-spots-left>8 spots left</li>
+                </ul>
                 <p class="event-kind">ADULTS · BOOK CLUB</p><h2>Community Book Club</h2>
                 <p><strong>Date:</strong> November 15, 2026 · 2:00 PM</p><p><strong>Location:</strong> Country Hills Library</p>
                 <p>Join fellow readers for a relaxed discussion of this month’s selected novel.</p>
-                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 8. Registration is required. Open to adults; book-club title is available to borrow or request.</p></details>
-                <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+                <details class="event-requirements"><summary>View details</summary><p>Registration is required. Open to adults; the book-club title is available to borrow or place on hold.</p></details>
+                <p class="event-card-status" data-event-status aria-live="polite"></p>
+                <div class="event-actions">
+                    <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+                    <button class="text-action" type="button" data-cancel-event hidden>Cancel registration</button>
+                </div>
             </article>
-            <article class="event" data-branch="Central Library" data-type="Tutoring" data-audience="Teens">
+            <article class="event" data-event-id="math-help" data-branch="Central Library" data-type="Tutoring" data-audience="Teens" data-registration="dropin" data-spots="5" data-date="December 6, 2026" data-time="4:00 PM" data-location="Central Library">
+                <ul class="event-tags" aria-label="Key facts">
+                    <li class="event-tag is-dropin">Drop-in · no registration needed</li>
+                    <li class="event-tag is-spots" data-spots-left>5 spaces</li>
+                </ul>
                 <p class="event-kind">TEENS · DROP IN</p><h2>Math Help Tutoring</h2>
                 <p><strong>Date:</strong> December 6, 2026 · 4:00 PM</p><p><strong>Location:</strong> Central Library</p>
                 <p>Get free math help from friendly tutors. Bring your questions and assignments.</p>
-                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 5. Drop in; registration is not required. Designed for teens. Bring your current homework or study questions.</p></details>
-                <button class="event-register" type="button" data-register-event>View event details <span aria-hidden="true">→</span></button>
+                <details class="event-requirements"><summary>View details</summary><p>Drop in; registration is not required. Designed for teens. Bring your current homework or study questions.</p></details>
+                <p class="event-dropin-note">No sign-up needed. Just come to the session.</p>
             </article>
-            <article class="event" data-branch="South Library" data-type="Welcome session" data-audience="Families">
+            <article class="event" data-event-id="newcomer-welcome" data-branch="South Library" data-type="Welcome session" data-audience="Families" data-registration="recommended" data-spots="12" data-date="December 12, 2026" data-time="11:00 AM" data-location="South Library">
+                <ul class="event-tags" aria-label="Key facts">
+                    <li class="event-tag is-recommended">Registration recommended</li>
+                    <li class="event-tag is-spots" data-spots-left>12 spots left</li>
+                </ul>
                 <p class="event-kind">ADULTS · COMMUNITY</p><h2>Newcomer Welcome Session</h2>
                 <p><strong>Date:</strong> December 12, 2026 · 11:00 AM</p><p><strong>Location:</strong> South Library</p>
                 <p>Meet other newcomers, learn about library services, and discover community resources.</p>
-                <details class="event-requirements" open><summary>Availability &amp; registration details</summary><p>Spaces available: 12. Registration is recommended. Open to newcomers and their families; no library card is needed to attend.</p></details>
-                <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+                <details class="event-requirements"><summary>View details</summary><p>Registration is recommended. Open to newcomers and their families; no library card is needed to attend.</p></details>
+                <p class="event-card-status" data-event-status aria-live="polite"></p>
+                <div class="event-actions">
+                    <button class="event-register" type="button" data-register-event>Register for event <span aria-hidden="true">→</span></button>
+                    <button class="text-action" type="button" data-cancel-event hidden>Cancel registration</button>
+                </div>
             </article>
         </div>
-        <p class="event-prototype-note">Event dates and availability are sample information for this project prototype.</p>
-        <p class="inline-feedback" data-event-feedback aria-live="polite"></p>
+        <p class="event-prototype-note">Event dates and availability are sample information for this project prototype. Your registrations are listed under <a href="MyAccount.html#events-title">My Account → My events</a>.</p>
+        <dialog class="prototype-dialog" id="event-dialog" aria-labelledby="event-dialog-title">
+            <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close">×</button></form>
+            <h2 id="event-dialog-title">Confirm registration</h2>
+            <p>Please check the event details before you register.</p>
+            <dl class="event-confirm-list">
+                <div><dt>Event</dt><dd data-confirm-field="title"></dd></div>
+                <div><dt>Date</dt><dd data-confirm-field="date"></dd></div>
+                <div><dt>Time</dt><dd data-confirm-field="time"></dd></div>
+                <div><dt>Location</dt><dd data-confirm-field="location"></dd></div>
+            </dl>
+            <p>You can cancel later from this page or from My Account.</p>
+            <form method="dialog" class="dialog-actions"><button class="secondary-action" value="cancel">Go back</button><button class="place-hold-action" value="confirm">Confirm registration</button></form>
+        </dialog>
     </main>
-    <footer class="site-footer"><a class="footer-brand" href="index.html"><span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span><span>Calgary Public Library</span></a><span>Curiosity lives here.</span><small>Library catalogue · CPSC 481</small></footer>
+    <footer class="site-footer"><a class="footer-brand" href="index.html"><span class="brand-mark"><img src="images/logo.jpg" alt="" class="brand-logo-image"></span><span>Calgary Public Library</span></a><span>Curiosity lives here.</span><a class="footer-help-link" href="Help.html">Help &amp; FAQ</a><small>Library catalogue · CPSC 481</small></footer>
 </body>
 </html>

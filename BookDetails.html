@@ -17,13 +17,15 @@
             <a href="index.html">Home</a>
             <a class="active" href="Browse.html">Browse</a>
             <a href="Events.html">Events</a>
+            <a href="MyAccount.html">My Account</a>
         </nav>
         <form class="nav-search" action="Browse.html" role="search"><label class="visually-hidden" for="nav-search-input">Search the catalogue</label><input id="nav-search-input" name="q" type="search" placeholder="Search"><button type="submit" aria-label="Search the catalogue">⌕</button></form>
         <details class="account-menu">
             <summary><span class="user-icon" aria-hidden="true">♙</span> Account <span class="account-chevron" aria-hidden="true">⌄</span></summary>
             <div class="account-menu-panel">
-                <a href="Login.html">Sign in</a>
                 <a href="MyAccount.html">My Account</a>
+                <a href="Help.html">Help &amp; FAQ</a>
+                <a href="Login.html">Log out</a>
             </div>
         </details>
     </header>
@@ -51,9 +53,10 @@
                     <strong>4.26</strong>
                     <button class="text-action" type="button" data-open-rating>Rate this</button>
                 </div>
+                <p class="your-rating" data-your-rating hidden></p>
                 <p class="rating-privacy">Ratings are public and appear with the book’s average. Do not include personal information.</p>
 
-                <button class="favourite-action" type="button" data-save-book aria-pressed="false">
+                <button class="favourite-action" type="button" data-save-book data-book-title="To Kill a Mockingbird" data-book-author="Harper Lee" aria-pressed="false">
                     <span aria-hidden="true">♡</span> Add to Saved Books
                 </button>
 
@@ -61,7 +64,8 @@
                     <h2 id="format-title">Choose a format</h2>
                     <label class="format-select-label" for="book-format">Format</label>
                     <form class="hold-controls" action="PlaceHold.html" method="get">
-                        <select id="book-format" name="format">
+                        <select id="book-format" name="format" required>
+                            <option value="" selected disabled>Choose a format</option>
                             <option value="book">Book</option>
                             <option value="ebook">eBook</option>
                             <option value="audiobook">Audiobook</option>
@@ -80,13 +84,19 @@
             <form id="rating-form">
                 <fieldset class="rating-options">
                     <legend>Choose a rating</legend>
-                    <label><input type="radio" name="rating" value="1" aria-label="1 star" required><span aria-hidden="true">★</span></label>
-                    <label><input type="radio" name="rating" value="2" aria-label="2 stars"><span aria-hidden="true">★★</span></label>
-                    <label><input type="radio" name="rating" value="3" aria-label="3 stars"><span aria-hidden="true">★★★</span></label>
-                    <label><input type="radio" name="rating" value="4" aria-label="4 stars"><span aria-hidden="true">★★★★</span></label>
-                    <label><input type="radio" name="rating" value="5" aria-label="5 stars"><span aria-hidden="true">★★★★★</span></label>
+                    <div class="rating-star-row">
+                        <label><input type="radio" name="rating" value="1" aria-label="1 out of 5 stars" required><span aria-hidden="true">★</span></label>
+                        <label><input type="radio" name="rating" value="2" aria-label="2 out of 5 stars"><span aria-hidden="true">★</span></label>
+                        <label><input type="radio" name="rating" value="3" aria-label="3 out of 5 stars"><span aria-hidden="true">★</span></label>
+                        <label><input type="radio" name="rating" value="4" aria-label="4 out of 5 stars"><span aria-hidden="true">★</span></label>
+                        <label><input type="radio" name="rating" value="5" aria-label="5 out of 5 stars"><span aria-hidden="true">★</span></label>
+                    </div>
+                    <p class="rating-value-label" data-rating-label aria-hidden="true">Select a rating</p>
                 </fieldset>
-                <button class="place-hold-action" type="submit">Submit rating</button>
+                <div class="rating-dialog-actions">
+                    <button class="place-hold-action" type="submit">Submit rating</button>
+                    <button class="secondary-action" type="button" data-remove-rating hidden>Remove my rating</button>
+                </div>
                 <p class="inline-feedback" id="rating-feedback" aria-live="polite"></p>
             </form>
         </dialog>
@@ -98,6 +108,7 @@
             <span>Calgary Public Library</span>
         </a>
         <span>Curiosity lives here.</span>
+        <a class="footer-help-link" href="Help.html">Help &amp; FAQ</a>
         <small>Library catalogue · CPSC 481</small>
     </footer>
     <script src="prototype.js" defer></script>
