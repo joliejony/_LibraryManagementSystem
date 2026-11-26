@@ -29,7 +29,16 @@ All pages link to each other from the navigation bar. If you use VS Code, the **
 
 ## Interactive features
 
-All behaviour lives in `prototype.js`:
+JavaScript is split by feature under `js/`, so each file is easier to follow:
+
+- `js/prototype.js` contains shared catalogue data, storage helpers, and the sign-in check for protected pages.
+- `js/books.js` handles Saved Books, book details, availability, and ratings.
+- `js/browse.js` handles catalogue search, filters, sorting, and result links.
+- `js/account.js` handles preferred branches, renewals, and holds.
+- `js/events.js` handles event filters and registration.
+- `js/login.js` handles sign-in, sign-up, password reset, sign-out, and the account menu.
+
+Each HTML page loads only the scripts it needs, with the shared `prototype.js` first.
 
 - **Browse and book details:** Home and Browse search use the catalogue. All 11 sample titles open their own details and availability pages. Borrow/Place hold opens the title’s detail page and format selector. Filters cover age group (Kids 0–7, Middle grade 8–12, Teens 13–17, Adults 18+), format and availability, with title/rating sorting, result count, and a no-results message. Home audience links open pre-filtered results.
 - **Saved Books:** the heart button on any book adds or removes it, and the list on My Account updates to match. A saved book shows "Saved" instead of offering to save it again.

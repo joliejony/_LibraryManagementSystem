@@ -40,7 +40,7 @@
                 <button class="login-submit" type="submit">Log in <span aria-hidden="true">→</span></button>
             </form>
 
-            <p class="login-prototype-note">Demo account: <strong>maria@example.com</strong> or card <strong>3456</strong>, password <strong>library</strong>. You can also create your own demo account below.</p>
+            <p class="login-prototype-note">Sign in with your email address or library card number. New members can create an account below.</p>
             <p class="create-account-prompt">New to the library? <button class="login-text-button" type="button" data-create-account>Create an account</button></p>
             <dialog class="prototype-dialog" id="password-reset-dialog" aria-labelledby="password-reset-title">
                 <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close password reset">×</button></form>
@@ -65,7 +65,7 @@
             </dialog>
             <dialog class="prototype-dialog" id="create-account-dialog" aria-labelledby="create-account-title">
                 <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close create account form">×</button></form>
-                <h2 id="create-account-title">Create a demo account</h2>
+                <h2 id="create-account-title">Create account</h2>
                 <p>This class prototype saves the account in this browser only. It does not create a real library membership.</p>
                 <form class="login-form" id="create-account-form">
                     <label for="new-member-name">Name</label>
@@ -82,12 +82,13 @@
                         <input id="new-member-password-confirm" name="password-confirm" type="password" autocomplete="new-password" minlength="6" required>
                         <button class="password-visibility-toggle" type="button" data-toggle-password="new-member-password-confirm" aria-controls="new-member-password-confirm" aria-label="Show password" aria-pressed="false">Show</button>
                     </div>
-                    <button class="login-submit" type="submit">Create demo account</button>
+                    <button class="login-submit" type="submit">Create account</button>
                     <p class="inline-feedback" data-create-feedback aria-live="polite"></p>
                 </form>
             </dialog>
         </section>
     </main>
-    <script src="prototype.js" defer></script>
+    <script src="js/prototype.js" defer></script>
+    <script src="js/login.js" defer></script>
 </body>
 </html>
