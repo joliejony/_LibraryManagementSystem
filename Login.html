@@ -32,13 +32,60 @@
                     <label for="login-password">Password</label>
                     <button class="login-text-button" type="button" data-forgot-password>Forgot password?</button>
                 </div>
-                <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password">
+                <div class="password-input-wrap">
+                    <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password">
+                    <button class="password-visibility-toggle" type="button" data-toggle-password="login-password" aria-controls="login-password" aria-label="Show password" aria-pressed="false">Show</button>
+                </div>
 
                 <button class="login-submit" type="submit">Log in <span aria-hidden="true">→</span></button>
             </form>
 
-            <p class="login-prototype-note">Prototype: use any card number with the password <strong>library</strong> to sign in. Any other password shows the error message.</p>
-            <p class="create-account-prompt">New to the library? <button class="login-text-button" type="button">Create an account</button></p>
+            <p class="login-prototype-note">Demo account: <strong>maria@example.com</strong> or card <strong>3456</strong>, password <strong>library</strong>. You can also create your own demo account below.</p>
+            <p class="create-account-prompt">New to the library? <button class="login-text-button" type="button" data-create-account>Create an account</button></p>
+            <dialog class="prototype-dialog" id="password-reset-dialog" aria-labelledby="password-reset-title">
+                <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close password reset">×</button></form>
+                <h2 id="password-reset-title">Reset your password</h2>
+                <p>Enter the email on your demo account and choose a new password. Then sign in with it. No email is sent.</p>
+                <form class="login-form" id="password-reset-form">
+                    <label for="reset-email">Email address</label>
+                    <input id="reset-email" name="email" type="email" autocomplete="email" required>
+                    <label for="new-password">New password</label>
+                    <div class="password-input-wrap">
+                        <input id="new-password" name="new-password" type="password" minlength="6" autocomplete="new-password" required>
+                        <button class="password-visibility-toggle" type="button" data-toggle-password="new-password" aria-controls="new-password" aria-label="Show password" aria-pressed="false">Show</button>
+                    </div>
+                    <label for="confirm-password">Confirm new password</label>
+                    <div class="password-input-wrap">
+                        <input id="confirm-password" name="confirm-password" type="password" minlength="6" autocomplete="new-password" required>
+                        <button class="password-visibility-toggle" type="button" data-toggle-password="confirm-password" aria-controls="confirm-password" aria-label="Show password" aria-pressed="false">Show</button>
+                    </div>
+                    <button class="login-submit" type="submit">Save new password</button>
+                    <p class="inline-feedback" data-reset-feedback aria-live="polite"></p>
+                </form>
+            </dialog>
+            <dialog class="prototype-dialog" id="create-account-dialog" aria-labelledby="create-account-title">
+                <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close create account form">×</button></form>
+                <h2 id="create-account-title">Create a demo account</h2>
+                <p>This class prototype saves the account in this browser only. It does not create a real library membership.</p>
+                <form class="login-form" id="create-account-form">
+                    <label for="new-member-name">Name</label>
+                    <input id="new-member-name" name="name" type="text" autocomplete="name" required>
+                    <label for="new-member-email">Email address</label>
+                    <input id="new-member-email" name="email" type="email" autocomplete="email" required>
+                    <label for="new-member-password">Password</label>
+                    <div class="password-input-wrap">
+                        <input id="new-member-password" name="password" type="password" autocomplete="new-password" minlength="6" required>
+                        <button class="password-visibility-toggle" type="button" data-toggle-password="new-member-password" aria-controls="new-member-password" aria-label="Show password" aria-pressed="false">Show</button>
+                    </div>
+                    <label for="new-member-password-confirm">Confirm password</label>
+                    <div class="password-input-wrap">
+                        <input id="new-member-password-confirm" name="password-confirm" type="password" autocomplete="new-password" minlength="6" required>
+                        <button class="password-visibility-toggle" type="button" data-toggle-password="new-member-password-confirm" aria-controls="new-member-password-confirm" aria-label="Show password" aria-pressed="false">Show</button>
+                    </div>
+                    <button class="login-submit" type="submit">Create demo account</button>
+                    <p class="inline-feedback" data-create-feedback aria-live="polite"></p>
+                </form>
+            </dialog>
         </section>
     </main>
     <script src="prototype.js" defer></script>

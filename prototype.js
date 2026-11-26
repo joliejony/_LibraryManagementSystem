@@ -1,5 +1,15 @@
 /* Small browser-only interactions for the CPSC 481 prototype. */
 document.addEventListener("DOMContentLoaded", () => {
+    const sessionKey = "cpl-demo-signed-in";
+    const currentPage = location.pathname.split("/").pop();
+    let isSignedIn = false;
+    try { isSignedIn = localStorage.getItem(sessionKey) === "true"; } catch {}
+    if (["MyAccount.html", "PlaceHold.html"].includes(currentPage) && !isSignedIn) {
+        const returnTo = `${currentPage}${location.search}${location.hash}`;
+        location.replace(`Login.html?next=${encodeURIComponent(returnTo)}`);
+        return;
+    }
+
     const savedKey = "cpl-saved-books";
     const branchKey = "cpl-preferred-branch";
     const holdsKey = "cpl-holds";
@@ -29,20 +39,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Catalogue facts, so saved books and holds always show the right title, author and cover. */
     const catalogue = {
-        "To Kill a Mockingbird": { author: "Harper Lee", image: "images/To%20kill%20a%20mockingbird.jpg" },
-        "The Midnight Library": { author: "Matt Haig", image: "images/themidnightlib.jpg" },
-        "Atomic Habits": { author: "James Clear", image: "images/atomic%20habbit.jpg" },
-        "The Thursday Murder Club": { author: "Richard Osman", image: "images/thursday_murder.jpg" },
-        "Killers of the Flower Moon": { author: "David Grann", image: "images/killers-of-the-flower-moon.jpg" },
-        "Kill Joy": { author: "Holly Jackson", image: "images/kill-joy.jpg" },
-        "Little Women": { author: "Louisa May Alcott", image: "images/LittleWomen.jpg" },
-        "Romeo and Juliet": { author: "William Shakespeare", image: "images/romeo%26juliet.jpg" },
-        "Charlotte’s Web": { author: "E. B. White", image: "images/cover-placeholder.jpg" },
-        "Where the Wild Things Are": { author: "Maurice Sendak", image: "images/cover-placeholder.jpg" },
-        "The Very Hungry Caterpillar": { author: "Eric Carle", image: "images/cover-placeholder.jpg" }
+        "To Kill a Mockingbird": { author: "Harper Lee", image: "images/To%20kill%20a%20mockingbird.jpg", rating: "4.26", format: "book", availability: "available" },
+        "The Midnight Library": { author: "Matt Haig", image: "images/themidnightlib.jpg", rating: "4.2", format: "book", availability: "waitlist" },
+        "Atomic Habits": { author: "James Clear", image: "images/atomic%20habbit.jpg", rating: "4.4", format: "audiobook", availability: "available" },
+        "The Thursday Murder Club": { author: "Richard Osman", image: "images/thursday_murder.jpg", rating: "4.1", format: "book", availability: "available" },
+        "Killers of the Flower Moon": { author: "David Grann", image: "images/killers-of-the-flower-moon.jpg", rating: "4.6", format: "book", availability: "available" },
+        "Kill Joy": { author: "Holly Jackson", image: "images/kill-joy.jpg", rating: "4.7", format: "ebook", availability: "available" },
+        "Little Women": { author: "Louisa May Alcott", image: "images/LittleWomen.jpg", rating: "4.3", format: "book", availability: "waitlist" },
+        "Romeo and Juliet": { author: "William Shakespeare", image: "images/romeo%26juliet.jpg", rating: "4.0", format: "ebook", availability: "available" },
+        "Charlotte’s Web": { author: "E. B. White", image: "images/cover-placeholder.jpg", rating: "4.5", format: "book", availability: "available" },
+        "Where the Wild Things Are": { author: "Maurice Sendak", image: "images/cover-placeholder.jpg", rating: "4.5", format: "book", availability: "available" },
+        "The Very Hungry Caterpillar": { author: "Eric Carle", image: "images/cover-placeholder.jpg", rating: "4.5", format: "book", availability: "available" }
+    };
+    const descriptions = {
+        "To Kill a Mockingbird": "Scout Finch looks back on a childhood shaped by family, friendship, and a difficult case in her Alabama town. The story explores fairness, empathy, and standing up for what is right.",
+        "The Midnight Library": "Between life and death, Nora Seed visits a library filled with versions of the life she might have lived, and considers what makes a life meaningful.",
+        "Atomic Habits": "James Clear explains how small, repeatable changes can help people build lasting habits and make progress toward their goals.",
+        "The Thursday Murder Club": "Four friends in a retirement community meet to investigate old cases, until a new murder brings a mystery close to home.",
+        "Killers of the Flower Moon": "David Grann investigates the murders of members of the Osage Nation in 1920s Oklahoma and the early history of the FBI.",
+        "Kill Joy": "Pip joins a murder mystery game and imagines herself investigating a case, in this prequel to A Good Girl’s Guide to Murder.",
+        "Little Women": "The March sisters grow up through family changes, friendship, work, and the hopes each has for her future.",
+        "Romeo and Juliet": "Shakespeare’s tragedy follows two young people whose love is caught between their families’ long-standing conflict.",
+        "Charlotte’s Web": "A young girl and a clever spider form a friendship as Charlotte finds a way to help save Wilbur the pig.",
+        "Where the Wild Things Are": "Max sails to an island of wild creatures, becomes their king, and eventually finds his way home.",
+        "The Very Hungry Caterpillar": "A caterpillar eats its way through a week of food before changing into a butterfly."
     };
     const formatLabels = { book: "Book", ebook: "eBook", audiobook: "Audiobook" };
     const params = new URLSearchParams(location.search);
+    const slugify = (value) => value.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const bookById = (id) => {
+        const title = Object.keys(catalogue).find((name) => slugify(name) === id);
+        if (!title) return { title: "To Kill a Mockingbird", ...catalogue["To Kill a Mockingbird"], id: "to-kill-a-mockingbird", description: descriptions["To Kill a Mockingbird"] };
+        return { id: slugify(title), title, ...catalogue[title], description: descriptions[title] };
+    };
+    const pageBook = bookById(params.get("book") || "to-kill-a-mockingbird");
 
     /* ---------- Saved Books ---------- */
     const invalidTitles = ["Book description", "Saved book", ""];
@@ -127,7 +157,10 @@ document.addEventListener("DOMContentLoaded", () => {
             image.src = facts.image || book.image || "images/cover-placeholder.jpg";
             image.alt = `Cover of ${book.title}${author ? ` by ${author}` : ""}`;
             const info = make("div");
-            info.append(make("h3", "", book.title), make("p", "", author));
+            const titleLink = make("a", "", book.title);
+            titleLink.href = `BookDetails.html?book=${encodeURIComponent(slugify(book.title))}`;
+            const heading = make("h3"); heading.append(titleLink);
+            info.append(heading, make("p", "", author));
             const remove = make("button", "remove-saved-button", "Remove from Saved Books");
             remove.type = "button";
             remove.addEventListener("click", () => {
@@ -163,6 +196,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const count = document.querySelector("[data-catalogue-count]");
         const empty = document.querySelector("[data-catalogue-empty]");
 
+        // Every sample result opens the same reusable book-detail and availability screens.
+        cards.forEach((card) => {
+            const heading = card.querySelector("h3");
+            const title = heading?.textContent.trim();
+            if (!title || !catalogue[title]) return;
+            const id = slugify(title), detailsUrl = `BookDetails.html?book=${encodeURIComponent(id)}`;
+            card.dataset.bookId = id;
+            let titleLink = heading.querySelector("a");
+            if (!titleLink) { titleLink = make("a", "", title); heading.replaceChildren(titleLink); }
+            titleLink.href = detailsUrl;
+            titleLink.setAttribute("aria-label", `View ${title} details`);
+            const cover = card.querySelector(".catalogue-cover");
+            if (cover) {
+                if (cover.tagName === "A") cover.href = detailsUrl;
+                else {
+                    const link = document.createElement("a"); link.className = cover.className; link.href = detailsUrl;
+                    link.setAttribute("aria-label", `View ${title} details`);
+                    cover.replaceWith(link); link.append(...cover.childNodes);
+                }
+            }
+            const save = card.querySelector("[data-save-book]");
+            if (save) { save.dataset.bookTitle = title; save.dataset.bookAuthor = catalogue[title].author; }
+            const availability = card.querySelector(".location-indicator");
+            if (availability) {
+                const link = availability.tagName === "A" ? availability : Object.assign(document.createElement("a"), { className: availability.className, innerHTML: availability.innerHTML });
+                link.href = `BookAvailability.html?book=${encodeURIComponent(id)}`;
+                if (availability !== link) availability.replaceWith(link);
+            }
+            card.querySelector(".borrow-button")?.addEventListener("click", () => { location.href = `${detailsUrl}#format-title`; });
+        });
+
         // Pre-set filters from the URL, e.g. Browse.html?age=kids or ?format=ebook&q=mystery
         filters.forEach((filter) => {
             const value = params.get(filter.dataset.catalogueFilter);
@@ -175,7 +239,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let shown = 0;
             cards.forEach((card) => {
                 const matchesFilters = filters.every((filter) => filter.value === "all" || card.dataset[filter.dataset.catalogueFilter] === filter.value);
-                const matchesSearch = words.every((word) => card.dataset.keywords.includes(word));
+                const searchable = `${card.dataset.keywords || ""} ${card.querySelector("h3")?.textContent || ""} ${card.querySelector(".catalogue-author")?.textContent || ""}`.toLowerCase();
+                const matchesSearch = words.every((word) => searchable.includes(word));
                 card.hidden = !(matchesFilters && matchesSearch);
                 if (!card.hidden) shown++;
             });
@@ -238,6 +303,93 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    /* ---------- Reusable book details and availability screens ---------- */
+    const detailsMain = document.querySelector(".book-details-main");
+    if (detailsMain) {
+        const title = detailsMain.querySelector(".book-detail-info h1");
+        const author = detailsMain.querySelector(".book-detail-author");
+        const cover = detailsMain.querySelector(".book-detail-cover img");
+        const description = detailsMain.querySelector(".book-description > p");
+        if (title) title.textContent = pageBook.title;
+        if (author) author.textContent = pageBook.author;
+        if (cover) { cover.src = pageBook.image; cover.alt = `Cover of ${pageBook.title} by ${pageBook.author}`; }
+        if (description) description.textContent = pageBook.description;
+        const save = detailsMain.querySelector("[data-save-book]");
+        if (save) { save.dataset.bookTitle = pageBook.title; save.dataset.bookAuthor = pageBook.author; }
+        const average = detailsMain.querySelector(".book-detail-rating strong");
+        const ratingValue = catalogue[pageBook.title]?.rating;
+        if (average && ratingValue) average.textContent = ratingValue;
+        const stars = detailsMain.querySelector(".book-detail-rating .detail-stars");
+        if (stars && ratingValue) stars.setAttribute("aria-label", `${ratingValue} out of 5 stars`);
+        const form = detailsMain.querySelector(".hold-controls");
+        if (form) {
+            let bookInput = form.querySelector('[name="book"]');
+            if (!bookInput) { bookInput = document.createElement("input"); bookInput.type = "hidden"; bookInput.name = "book"; form.append(bookInput); }
+            bookInput.value = pageBook.id;
+        }
+        const availabilityLink = detailsMain.querySelector(".availability-action");
+        if (availabilityLink) availabilityLink.href = `BookAvailability.html?book=${encodeURIComponent(pageBook.id)}`;
+        const changeLink = document.querySelector("[data-change-format]");
+        if (changeLink) changeLink.href = `${location.pathname}?book=${encodeURIComponent(pageBook.id)}#format-title`;
+    }
+
+    const availabilityMain = document.querySelector(".availability-main");
+    if (availabilityMain) {
+        const title = availabilityMain.querySelector(".availability-book-info h2");
+        const author = availabilityMain.querySelector(".availability-book-info > p:not(.catalogue-rating)");
+        const cover = availabilityMain.querySelector(".availability-book-card img");
+        if (title) title.textContent = pageBook.title;
+        if (author) author.textContent = pageBook.author;
+        if (cover) { cover.src = pageBook.image; cover.alt = `Cover of ${pageBook.title} by ${pageBook.author}`; }
+        const rating = availabilityMain.querySelector(".catalogue-rating");
+        if (rating && catalogue[pageBook.title]?.rating) {
+            rating.setAttribute("aria-label", `Rated ${catalogue[pageBook.title].rating} out of 5 stars`);
+            const value = rating.childNodes[rating.childNodes.length - 1];
+            if (value) value.textContent = ` ${catalogue[pageBook.title].rating}`;
+        }
+        const back = availabilityMain.querySelector(".back-to-results");
+        if (back) back.href = `BookDetails.html?book=${encodeURIComponent(pageBook.id)}`;
+        const summary = availabilityMain.querySelector(".availability-summary");
+        if (summary) {
+            const status = summary.querySelector("strong"), note = summary.querySelector("small");
+            const digital = catalogue[pageBook.title]?.format === "ebook" || catalogue[pageBook.title]?.format === "audiobook";
+            if (digital) {
+                if (status) status.textContent = "Available online";
+                if (note) note.textContent = "Digital collection";
+            } else if (catalogue[pageBook.title]?.availability === "waitlist") {
+                if (status) status.textContent = "Waitlist";
+                if (note) note.textContent = "All copies are currently on loan";
+            }
+            const rows = [...availabilityMain.querySelectorAll(".availability-table tbody tr")];
+            if (digital) {
+                rows.forEach((row, index) => { row.hidden = index > 0; });
+                if (rows[0]) {
+                    const cells = rows[0].querySelectorAll("td");
+                    if (rows[0].querySelector("th")) rows[0].querySelector("th").textContent = "Online collection";
+                    if (cells[0]) cells[0].textContent = "Digital collection";
+                    if (cells[1]) cells[1].textContent = "Online";
+                    const state = cells[2]?.querySelector(".copy-status");
+                    if (state) { state.className = "copy-status is-available"; state.textContent = "Available now"; }
+                }
+            } else if (catalogue[pageBook.title]?.availability === "waitlist") {
+                rows.forEach((row) => {
+                    const state = row.querySelector(".copy-status");
+                    if (state) { state.className = "copy-status is-on-hold"; state.textContent = "On loan · place a hold"; }
+                    row.querySelector(".status-note")?.remove();
+                });
+            } else rows.forEach((row) => { row.hidden = false; });
+        }
+        const collection = pageBook.title === "To Kill a Mockingbird" ? "Adult Fiction" : "Library collection";
+        const callNumber = pageBook.title === "To Kill a Mockingbird" ? "FIC LEE" : "Sample record";
+        availabilityMain.querySelectorAll(".availability-table tbody tr").forEach((row) => {
+            const cells = row.querySelectorAll("td");
+            const digital = catalogue[pageBook.title]?.format === "ebook" || catalogue[pageBook.title]?.format === "audiobook";
+            if (digital) return;
+            if (cells[0]) cells[0].textContent = collection;
+            if (cells[1]) cells[1].textContent = callNumber;
+        });
+    }
+
     /* ---------- Book details: format and ratings ---------- */
     const bookFormat = document.querySelector("#book-format");
     if (bookFormat && formatLabels[params.get("format")]) bookFormat.value = params.get("format");
@@ -294,7 +446,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ratings[ratedTitle] = rating;
         writeJSON(ratingsKey, ratings);
         showYourRating();
-        ratingDialog?.close();
+        const feedback = document.querySelector("#rating-feedback");
+        if (feedback) feedback.textContent = `Your rating was submitted: ${rating} out of 5.`;
     });
     removeRating?.addEventListener("click", () => {
         const ratings = readJSON(ratingsKey, {});
@@ -304,22 +457,43 @@ document.addEventListener("DOMContentLoaded", () => {
         ratingDialog?.close();
     });
     showYourRating();
+    if (location.hash === "#rating" && rateButton) rateButton.click();
+
+    document.querySelectorAll(".rate-now-button").forEach((button) => button.addEventListener("click", () => {
+        const title = button.closest("article")?.querySelector("h3")?.textContent.trim();
+        if (title) location.href = `BookDetails.html?book=${encodeURIComponent(slugify(title))}#rating`;
+    }));
 
     /* ---------- My Account: renewals ---------- */
     const renewDialog = document.querySelector("#renew-dialog");
+    const renewalsKey = "cpl-renewed-items";
+    const renewedItems = readJSON(renewalsKey, []);
+    document.querySelectorAll("[data-renew-item]").forEach((item) => {
+        const title = item.querySelector("h3")?.textContent.trim();
+        if (item.dataset.eligible === "true" && renewedItems.includes(title)) {
+            const dueDate = item.querySelector(".item-due-date");
+            if (dueDate) dueDate.textContent = "Renewed · new due date in 3 weeks";
+            const button = item.querySelector(".renew-item-button");
+            if (button) { button.textContent = "Renewed"; button.disabled = true; }
+        }
+    });
     document.querySelector("[data-open-renew]")?.addEventListener("click", () => renewDialog?.showModal());
     renewDialog?.addEventListener("close", () => {
         if (renewDialog.returnValue !== "confirm") return;
         document.querySelectorAll('[data-renew-item][data-eligible="true"] .item-due-date').forEach((dueDate) => {
-            dueDate.textContent = "Renewed · new due date Nov 30";
+            dueDate.textContent = "Renewed · new due date in 3 weeks";
         });
+        writeJSON(renewalsKey, [...new Set([...renewedItems, ...[...document.querySelectorAll('[data-renew-item][data-eligible="true"] h3')].map((heading) => heading.textContent.trim())])]);
+        document.querySelectorAll('[data-renew-item][data-eligible="true"] .renew-item-button').forEach((button) => { button.textContent = "Renewed"; button.disabled = true; });
         const feedback = document.querySelector("#renew-feedback");
         if (feedback) feedback.textContent = "Eligible items renewed in this prototype. Items with another reader’s hold were skipped.";
     });
     document.querySelectorAll(".renew-item-button:not(:disabled)").forEach((button) => {
         button.addEventListener("click", () => {
             const dueDate = button.closest(".account-item-card")?.querySelector(".item-due-date");
-            if (dueDate) dueDate.textContent = "Renewed · new due date Nov 30";
+            if (dueDate) dueDate.textContent = "Renewed · new due date in 3 weeks";
+            const title = button.closest("[data-renew-item]")?.querySelector("h3")?.textContent.trim();
+            if (title) writeJSON(renewalsKey, [...new Set([...readJSON(renewalsKey, []), title])]);
             button.textContent = "Renewed";
             button.disabled = true;
         });
@@ -335,7 +509,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Place a Hold page
     const holdForm = document.querySelector("[data-hold-form]");
     if (holdForm) {
-        const title = document.querySelector(".hold-book-info h2")?.textContent.trim() || "this book";
+        const titleElement = document.querySelector(".hold-book-info h2");
+        const authorElement = document.querySelector(".hold-book-author");
+        const coverElement = document.querySelector(".hold-book-summary img");
+        const saveButton = document.querySelector(".hold-book-summary [data-save-book]");
+        if (titleElement) titleElement.textContent = pageBook.title;
+        if (authorElement) authorElement.textContent = pageBook.author;
+        if (coverElement) { coverElement.src = pageBook.image; coverElement.alt = `Cover of ${pageBook.title} by ${pageBook.author}`; }
+        if (saveButton) { saveButton.dataset.bookTitle = pageBook.title; saveButton.dataset.bookAuthor = pageBook.author; }
+        const title = pageBook.title;
         const format = formatLabels[params.get("format")] ? params.get("format") : "";
         const isDigital = format === "ebook" || format === "audiobook";
         const confirmButton = document.querySelector("[data-confirm-hold]");
@@ -346,9 +528,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (formatText) formatText.textContent = format ? formatLabels[format] : "Not chosen yet";
         if (changeFormat) {
-            changeFormat.href = `BookDetails.html${format ? `?format=${format}` : ""}#format-title`;
+            const returnParams = new URLSearchParams({ book: pageBook.id });
+            if (format) returnParams.set("format", format);
+            changeFormat.href = `BookDetails.html?${returnParams.toString()}#format-title`;
             changeFormat.textContent = format ? "Change" : "Choose a format";
         }
+        success?.querySelectorAll('a[href="BookDetails.html"]').forEach((link) => { link.href = `BookDetails.html?book=${encodeURIComponent(pageBook.id)}`; });
+        document.querySelectorAll('.place-hold-main a[href="BookDetails.html"]').forEach((link) => { link.href = `BookDetails.html?book=${encodeURIComponent(pageBook.id)}`; });
         if (!format) {
             confirmButton.disabled = true;
             document.querySelector("[data-format-warning]").hidden = false;
@@ -363,10 +549,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const showSuccess = (hold, alreadyPlaced) => {
-            const ready = hold.branch
-                ? `ready for pickup at <strong>${hold.branch}</strong>`
-                : `ready to ${hold.format === "ebook" ? "read" : "listen to"} online`;
-            successMessage.innerHTML = `${alreadyPlaced ? "You already have a hold on" : ""} <strong>${hold.title}</strong> (${formatLabels[hold.format]})${alreadyPlaced ? "." : " is on hold."} You’re <strong>#${hold.position} in line</strong>. We’ll email you when it’s ${ready}.`;
+            if (alreadyPlaced && hold.status === "ready") {
+                successMessage.innerHTML = `Your <strong>${hold.title}</strong> (${formatLabels[hold.format]}) is already ready for pickup at <strong>${hold.branch}</strong>. Pick it up by ${hold.pickupBy}.`;
+            } else {
+                const ready = hold.branch
+                    ? `ready for pickup at <strong>${hold.branch}</strong>`
+                    : `ready to ${hold.format === "ebook" ? "read" : "listen to"} online`;
+                successMessage.innerHTML = `${alreadyPlaced ? "You already have a hold on" : ""} <strong>${hold.title}</strong> (${formatLabels[hold.format]})${alreadyPlaced ? "." : " is on hold."} You’re <strong>#${hold.position || 1} in line</strong>. We’ll email you when it’s ${ready}.`;
+            }
             if (alreadyPlaced) success.querySelector(".hold-success-title").lastChild.textContent = " Already on hold";
             holdForm.hidden = true;
             success.hidden = false;
@@ -565,10 +755,93 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ---------- Log in ---------- */
     const loginForm = document.querySelector("[data-login-form]");
     const loginError = document.querySelector("[data-login-error]");
+    const defaultLoginError = loginError?.innerHTML || "";
+    const resetDialog = document.querySelector("#password-reset-dialog");
+    const resetForm = document.querySelector("#password-reset-form");
+    const resetFeedback = document.querySelector("[data-reset-feedback]");
+    const createDialog = document.querySelector("#create-account-dialog");
+    const createForm = document.querySelector("#create-account-form");
+    const createFeedback = document.querySelector("[data-create-feedback]");
+    const resetPasswordVisibility = (form) => form.querySelectorAll("[data-toggle-password]").forEach((button) => {
+        const input = document.getElementById(button.dataset.togglePassword);
+        if (input) input.type = "password";
+        button.textContent = "Show";
+        button.setAttribute("aria-label", "Show password");
+        button.setAttribute("aria-pressed", "false");
+    });
+    document.querySelectorAll(".login-form").forEach((form) => form.addEventListener("reset", () => resetPasswordVisibility(form)));
+    document.querySelectorAll("dialog").forEach((dialog) => dialog.addEventListener("close", () => {
+        dialog.querySelectorAll(".login-form").forEach(resetPasswordVisibility);
+    }));
+    document.querySelectorAll("[data-toggle-password]").forEach((button) => button.addEventListener("click", () => {
+        const input = document.getElementById(button.dataset.togglePassword);
+        if (!input) return;
+        const visible = input.type === "password";
+        input.type = visible ? "text" : "password";
+        button.textContent = visible ? "Hide" : "Show";
+        button.setAttribute("aria-label", `${visible ? "Hide" : "Show"} password`);
+        button.setAttribute("aria-pressed", String(visible));
+        input.focus({ preventScroll: true });
+    }));
+    const accountsKey = "cpl-demo-accounts";
+    const currentUserKey = "cpl-demo-current-user";
+    const oldPasswordKey = "cpl-demo-password";
+    let accounts = readJSON(accountsKey, null);
+    if (Array.isArray(accounts)) accounts = accounts.filter((account) => account && typeof account.name === "string" && typeof account.email === "string" && typeof account.cardNumber === "string" && typeof account.password === "string");
+    if (!Array.isArray(accounts) || !accounts.length) {
+        let oldPassword = "library";
+        try { oldPassword = localStorage.getItem(oldPasswordKey) || "library"; } catch {}
+        accounts = [{ name: "Maria", email: "maria@example.com", cardNumber: "3456", password: oldPassword }];
+        writeJSON(accountsKey, accounts);
+    }
+
+    const activeEmail = getStorage(currentUserKey);
+    const activeAccount = accounts.find((account) => account.email === activeEmail);
+    if (activeAccount) {
+        const accountTitle = document.querySelector("#account-title");
+        const cardNumber = document.querySelector(".library-card-number strong");
+        if (accountTitle) accountTitle.textContent = `Hello, ${activeAccount.name}`;
+        if (cardNumber) cardNumber.textContent = activeAccount.cardNumber.slice(-4);
+    }
+
+    document.querySelectorAll(".account-menu a").forEach((link) => {
+        if (link.textContent.trim().toLowerCase() === "log out") {
+            link.textContent = isSignedIn ? "Log out" : "Sign in";
+            link.href = isSignedIn ? "Login.html?logout=1" : "Login.html";
+        }
+    });
+    if (params.get("logout") === "1") {
+        try {
+            localStorage.removeItem(sessionKey);
+            localStorage.removeItem(currentUserKey);
+        } catch {
+            setStorage(sessionKey, "");
+            setStorage(currentUserKey, "");
+        }
+        if (loginError) {
+            loginError.classList.add("is-info");
+            loginError.innerHTML = "<strong>You’re signed out.</strong><span>Your saved books, holds, and event registrations remain in this browser.</span>";
+            loginError.hidden = false;
+        }
+    }
     if (loginForm && loginError) {
         const idInput = loginForm.querySelector("#library-id");
         const passwordInput = loginForm.querySelector("#login-password");
-        const defaultError = loginError.innerHTML;
+        const next = params.get("next");
+        if (next && params.get("logout") !== "1") {
+            const nextPage = next.split(/[?#]/, 1)[0].split("/").pop();
+            const message = nextPage === "PlaceHold.html"
+                ? "Sign in to place your hold. Your selected book and format will be waiting."
+                : nextPage === "MyAccount.html" ? "Sign in to view your library account." : "Sign in to continue.";
+            loginError.classList.add("is-info");
+            loginError.innerHTML = `<strong>${message}</strong><span>Use your demo email or card number and password to continue.</span>`;
+            loginError.hidden = false;
+        }
+        const openReset = () => { if (resetFeedback) resetFeedback.textContent = ""; resetDialog?.showModal(); resetDialog?.querySelector("#reset-email")?.focus(); };
+        document.addEventListener("click", (event) => {
+            if (!event.target.closest("[data-forgot-password]")) return;
+            event.preventDefault(); openReset();
+        });
         loginForm.addEventListener("submit", (event) => {
             event.preventDefault();
             loginError.classList.remove("is-info");
@@ -578,9 +851,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 (idInput.value.trim() ? passwordInput : idInput).focus();
                 return;
             }
-            if (passwordInput.value !== "library") {
-                loginError.innerHTML = defaultError;
-                wireForgot();
+            const identifier = idInput.value.trim().toLowerCase();
+            const member = accounts.find((account) => account.email.toLowerCase() === identifier || account.cardNumber === idInput.value.trim());
+            if (!member || passwordInput.value !== member.password) {
+                loginError.innerHTML = defaultLoginError;
                 loginError.hidden = false;
                 idInput.setAttribute("aria-invalid", "true");
                 passwordInput.setAttribute("aria-invalid", "true");
@@ -588,15 +862,72 @@ document.addEventListener("DOMContentLoaded", () => {
                 passwordInput.focus();
                 return;
             }
-            location.href = "MyAccount.html";
+            setStorage(sessionKey, "true");
+            setStorage(currentUserKey, member.email);
+            let destination = "MyAccount.html";
+            if (next) {
+                try {
+                    const candidate = new URL(next, location.href);
+                    const allowedPages = ["MyAccount.html", "PlaceHold.html", "BookDetails.html", "Browse.html", "Events.html"];
+                    if (candidate.origin === location.origin && allowedPages.includes(candidate.pathname.split("/").pop())) destination = `${candidate.pathname.split("/").pop()}${candidate.search}${candidate.hash}`;
+                } catch { /* Invalid return path: use the account page. */ }
+            }
+            location.href = destination;
         });
         [idInput, passwordInput].forEach((input) => input.addEventListener("input", () => input.removeAttribute("aria-invalid")));
-        const showReset = () => {
-            loginError.classList.add("is-info");
-            loginError.innerHTML = "<strong>Reset your password</strong><span>We’ll email a reset link to the address on your account. (Prototype only, no email is sent.)</span>";
-            loginError.hidden = false;
-        };
-        const wireForgot = () => document.querySelectorAll("[data-forgot-password]").forEach((button) => button.onclick = showReset);
-        wireForgot();
     }
+    resetForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = resetForm.querySelector("#reset-email").value.trim().toLowerCase();
+        const nextPassword = resetForm.querySelector("#new-password").value;
+        const confirmPassword = resetForm.querySelector("#confirm-password").value;
+        const memberIndex = accounts.findIndex((account) => account.email.toLowerCase() === email);
+        if (memberIndex < 0) { resetFeedback.textContent = "No demo account uses that email. Create an account first, or check the address."; return; }
+        if (nextPassword !== confirmPassword) { resetFeedback.textContent = "The passwords do not match. Please enter them again."; resetForm.querySelector("#confirm-password").focus(); return; }
+        accounts[memberIndex].password = nextPassword;
+        writeJSON(accountsKey, accounts);
+        resetFeedback.textContent = "Your demo password was changed. Sign in with this email and your new password. No email was sent.";
+        resetForm.reset();
+    });
+    document.querySelector("[data-create-account]")?.addEventListener("click", () => {
+        if (createFeedback) createFeedback.textContent = "";
+        createForm?.reset();
+        createDialog?.showModal();
+        createDialog?.querySelector("#new-member-name")?.focus();
+    });
+    createForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const name = createForm.querySelector("#new-member-name").value.trim();
+        const email = createForm.querySelector("#new-member-email").value.trim().toLowerCase();
+        const password = createForm.querySelector("#new-member-password").value;
+        const confirmation = createForm.querySelector("#new-member-password-confirm").value;
+        if (!name) {
+            createFeedback.textContent = "Enter your name to create the demo account.";
+            createForm.querySelector("#new-member-name").focus();
+            return;
+        }
+        if (password !== confirmation) {
+            createFeedback.textContent = "The passwords do not match. Please enter them again.";
+            createForm.querySelector("#new-member-password-confirm").focus();
+            return;
+        }
+        if (accounts.some((account) => account.email.toLowerCase() === email)) {
+            createFeedback.textContent = "An account already uses this email. Sign in or use Forgot password?";
+            createForm.querySelector("#new-member-email").focus();
+            return;
+        }
+        const cardNumber = String(100000 + accounts.length);
+        accounts.push({ name, email, cardNumber, password });
+        writeJSON(accountsKey, accounts);
+        createDialog.close();
+        createForm.reset();
+        const idInput = loginForm?.querySelector("#library-id");
+        if (idInput) idInput.value = email;
+        if (loginError) {
+            loginError.classList.add("is-info");
+            loginError.innerHTML = "<strong>Your demo account is ready.</strong><span></span>";
+            loginError.querySelector("span").textContent = `Sign in with ${email} or card ${cardNumber}, and the password you chose.`;
+            loginError.hidden = false;
+        }
+    });
 });
